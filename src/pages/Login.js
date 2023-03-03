@@ -1,4 +1,4 @@
-import {Card, Form, Button } from 'react-bootstrap';
+import {Card, Form, Button, Col, Container } from 'react-bootstrap';
 //Complete (3) Hooks of React
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../UserContext';
@@ -99,44 +99,49 @@ export default function Login() {
     ?
     <Navigate to="/courses"/>
     :
-    <Card className="my-5">
-      <Card.Body className="">
-        <Form onSubmit={e => authenticate(e)}>
-          <Form.Group className="mb-3" controlId="userEmail">
-          <Form.Label>Email address</Form.Label>
-          <Form.Control
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={e => setEmail(e.target.value)}
-            required
-          />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="password">
-            <Form.Label>Password</Form.Label>
+    <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
+      <h5 className="text-center py-2" style={{color:"green"}}>Sign in to Course Booking</h5>
+      <Card>
+        <Card.Body className="">
+          <Form onSubmit={e => authenticate(e)}>
+            <Form.Group className="mb-3" controlId="userEmail">
+            <Form.Label>Email address</Form.Label>
             <Form.Control
-            type="password"
-            placeholder="Password"
-            value={password}
-            onChange={e => setPassword(e.target.value)}
-            required
+              type="email"
+              placeholder="Enter your email"
+              value={email}
+              onChange={e => setEmail(e.target.value)}
+              required
             />
-          </Form.Group>
-      
-          { isActive ?
-          <Button variant="success" type="submit" id="submitBtn">
-            Login
-          </Button>
-          :
-          <Button variant="danger" type="submit" id="submitBtn" disabled>
-            Login
-          </Button>
-          }
+            </Form.Group>
 
-        </Form>
-      </Card.Body>
-    </Card>
+            <Form.Group className="mb-3" controlId="password">
+              <Form.Label>Password</Form.Label>
+              <Form.Control
+              type="password"
+              placeholder="Password"
+              value={password}
+              onChange={e => setPassword(e.target.value)}
+              required
+              />
+            </Form.Group>
+
+            <Container className="text-center">
+            { isActive ?
+            <Button variant="success" type="submit" id="submitBtn">
+              Sign in
+            </Button>
+            :
+            <Button variant="danger" type="submit" id="submitBtn" disabled>
+              Sign in
+            </Button>
+            }
+            </Container>
+
+          </Form>
+        </Card.Body>
+      </Card>
+    </Col>
     
   );
 }

@@ -65,7 +65,7 @@ export default function CourseView(){
 
 	},[courseId])
 
-	return(
+	return (
 		<Container className="mt-5">
 		  <Row>
 		     <Col lg={{span:6, offset:3}}>
@@ -76,11 +76,14 @@ export default function CourseView(){
 						<Card.Text>{description}</Card.Text>
 						<Card.Subtitle>Price:</Card.Subtitle>
 						<Card.Text>PHP {price}</Card.Text>
-						<Card.Text>Class Schedule</Card.Text>
+						<Card.Subtitle>Class Schedule:</Card.Subtitle>
 						<Card.Text>8:00AM to 5:00PM</Card.Text>
 						{
 							(user.id!==null)?
-							<Button variant="primary" onClick={()=>enroll(courseId)}>Enroll</Button>
+								(user.isAdmin === true) ?
+								<Button as={ Link } to={`/editCourse/${courseId}`} variant="primary" size="sm" className="mt-1 px-3">Edit</Button>
+								:
+								<Button variant="primary" onClick={()=>enroll(courseId)}>Enroll</Button>
 							:
 							<Link className="btn btn-danger" to="/login">Log in to Enroll</Link>
 						}

@@ -3,7 +3,7 @@ import { Navigate, Link, useParams, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 
-import { Form, Button } from 'react-bootstrap';
+import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap';
 
 export default function EditCourse() {
 
@@ -94,74 +94,82 @@ export default function EditCourse() {
     }, [courseId]);
 
     return (
-    	user.isAdmin
-    	?
-			<>
-		    	<h1 className="my-5 text-center">Edit Course</h1>
-		        <Form onSubmit={e => editCourse(e)}>
-		        	<Form.Group controlId="name" className="mb-3">
-		                <Form.Label>Course Name</Form.Label>
-		                <Form.Control 
-			                type="text" 
-			                placeholder="Enter Course Name" 
-			                value = {name}
-			                onChange={e => setName(e.target.value)}
-			                required
-		                />
-		            </Form.Group>
 
-		            <Form.Group controlId="description" className="mb-3">
-		                <Form.Label>Course Description</Form.Label>
-		                <Form.Control
-		                	as="textarea"
-		                	rows={3}
-			                placeholder="Enter Course Description" 
-			                value = {description}
-			                onChange={e => setDescription(e.target.value)}
-			                required
-		                />
-		            </Form.Group>
+    	<Container className="mt-5">
+		  <Row>
+		     <Col lg={{span:6, offset:3}}>
+				<Card className="p-3">
+					{ user.isAdmin ?
+					<>
+			    	<h3 className="my-3 text-center">Edit Course</h3>
+			        <Form onSubmit={e => editCourse(e)}>
+			        	<Form.Group controlId="name" className="mb-3">
+			                <Form.Label>Course Name</Form.Label>
+			                <Form.Control 
+				                type="text" 
+				                placeholder="Enter Course Name" 
+				                value = {name}
+				                onChange={e => setName(e.target.value)}
+				                required
+			                />
+			            </Form.Group>
 
-		            <Form.Group controlId="price" className="mb-3">
-		                <Form.Label>Course Price</Form.Label>
-		                <Form.Control 
-			                type="number" 
-			                placeholder="Enter Course Price" 
-			                value = {price}
-			                onChange={e => setPrice(e.target.value)}
-			                required
-		                />
-		            </Form.Group>
+			            <Form.Group controlId="description" className="mb-3">
+			                <Form.Label>Course Description</Form.Label>
+			                <Form.Control
+			                	as="textarea"
+			                	rows={3}
+				                placeholder="Enter Course Description" 
+				                value = {description}
+				                onChange={e => setDescription(e.target.value)}
+				                required
+			                />
+			            </Form.Group>
 
-		            {/*<Form.Group controlId="slots" className="mb-3">
-		                <Form.Label>Course Slots</Form.Label>
-		                <Form.Control 
-			                type="number" 
-			                placeholder="Enter Course Slots" 
-			                value = {slots}
-			                onChange={e => setSlots(e.target.value)}
-			                required
-		                />
-		            </Form.Group>*/}
+			            <Form.Group controlId="price" className="mb-3">
+			                <Form.Label>Course Price</Form.Label>
+			                <Form.Control 
+				                type="number" 
+				                placeholder="Enter Course Price" 
+				                value = {price}
+				                onChange={e => setPrice(e.target.value)}
+				                required
+			                />
+			            </Form.Group>
 
-	        	    { isActive 
-	        	    	? 
-	        	    	<Button variant="primary" type="submit" id="submitBtn">
-	        	    		Update
-	        	    	</Button>
-	        	        : 
-	        	        <Button variant="danger" type="submit" id="submitBtn" disabled>
-	        	        	Update
-	        	        </Button>
-	        	    }
-	        	    	<Button className="m-2" as={Link} to="/admin" variant="success" type="submit" id="submitBtn">
-	        	    		Cancel
-	        	    	</Button>
-		        </Form>
-	    	</>
-    	:
-    	    <Navigate to="/courses" />
-	    	
+			            {/*<Form.Group controlId="slots" className="mb-3">
+			                <Form.Label>Course Slots</Form.Label>
+			                <Form.Control 
+				                type="number" 
+				                placeholder="Enter Course Slots" 
+				                value = {slots}
+				                onChange={e => setSlots(e.target.value)}
+				                required
+			                />
+			            </Form.Group>*/}
+
+		        	    { isActive 
+		        	    	? 
+		        	    	<Button variant="primary" type="submit" id="submitBtn">
+		        	    		Update
+		        	    	</Button>
+		        	        : 
+		        	        <Button variant="danger" type="submit" id="submitBtn" disabled>
+		        	        	Update
+		        	        </Button>
+		        	    }
+		        	    	<Button className="m-2" as={Link} to="/admin" variant="success" type="submit" id="submitBtn">
+		        	    		Cancel
+		        	    	</Button>
+			        </Form>
+		    		</>
+    				:
+		    	    <Navigate to="/courses" />
+		    		}
+				</Card>
+		     </Col>
+		  </Row>
+		</Container>
     )
 
 }

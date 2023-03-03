@@ -13,7 +13,7 @@ export default function Banner({bannerProp}){
 				<Col>
 					<h1>{title}</h1>
 					<p>{content}</p>
-					<Button as={Link} to={destination} variant="primary">{label}</Button>
+					<Button style={{width: "130px"}} as={Link} to={destination} variant="primary">{label}</Button>
 				</Col>
 			</Row>
 		</div>	

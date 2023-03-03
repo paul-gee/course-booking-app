@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
 import { Navigate, Link } from "react-router-dom";
 import UserContext from "../UserContext";
+import '../css/Dash.css';
 
 import Swal from "sweetalert2";
 
@@ -21,13 +22,14 @@ export default function Dash(){
 		.then(res => res.json())
 		.then(data => {
 
-			setAllCourses(data.map(course => {
+			setAllCourses(data.map((course, index) => {
 				return(
 					<tr key={course._id}>
-						<td>{course._id}</td>
+						<td>{index + 1}</td>
+						<td className="hideOnSmall">{course._id}</td>
 						<td>{course.name}</td>
-						<td>{course.description}</td>
-						<td>{course.price}</td>
+						<td className="hideOnSmall">{course.description}</td>
+						<td className="hideOnSmall">{course.price}</td>
 						<td>{course.isActive ? "Active" : "Inactive"}</td>
 						<td>
 							<ButtonGroup vertical>
@@ -37,8 +39,10 @@ export default function Dash(){
 									:
 									<Button variant="success" size="sm" onClick={() => unarchive(course._id, course.name)}>Unarchive</Button>
 								}
-								<Button as={ Link } to={`/editCourse/${course._id}`} variant="secondary" size="sm" className="mt-1" >Edit</Button>
+								<Button as={ Link } to={`/courses/${course._id}`} variant="primary" size="sm" className="mt-1">View</Button>
+								<Button as={ Link } to={`/editCourse/${course._id}`} variant="secondary" size="sm" className="mt-1">Edit</Button>
 							</ButtonGroup>
+
 	
 						</td>
 					</tr>
@@ -136,10 +140,11 @@ export default function Dash(){
 			<Table striped bordered hover className="text-center align-middle">
 		     <thead>
 		       <tr>
-		         <th>Course ID</th>
+		       	 <th> No</th>
+		         <th className="hideOnSmall">Course ID</th>
 		         <th>Course Name</th>
-		         <th>Description</th>
-		         <th>Price</th>
+		         <th className="hideOnSmall">Description</th>
+		         <th className="hideOnSmall">Price</th>
 		         <th>Status</th>
 		         <th>Action</th>
 		       </tr>

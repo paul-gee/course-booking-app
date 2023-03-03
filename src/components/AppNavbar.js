@@ -9,21 +9,21 @@ export default function AppNavbar(){
 	const { user } = useContext(UserContext);
 
 	return(
-		<Navbar bg="secondary" expand="lg">
+		<Navbar className="my-3" expand="lg">
 	      <Container>
 	        <Navbar.Brand as={Link} to="/">Course Booking</Navbar.Brand>
 	        <Navbar.Toggle aria-controls="basic-navbar-nav" />
 	        <Navbar.Collapse id="basic-navbar-nav">
 	          <Nav className="ms-auto">
-	            <Nav.Link as={Link} to="/">Home</Nav.Link>
-	            <Nav.Link as={Link} to="/courses">Courses</Nav.Link>
+	            <Nav.Link className="mx-3" as={Link} to="/">Home</Nav.Link>
+	            <Nav.Link className="mx-3" as={Link} to="/courses">Courses</Nav.Link>
 
 	            {(user.id !== null) ?
-	            	<Nav.Link as={Link} to="/logout">Logout</Nav.Link>
+	            	<Nav.Link className="mx-3" as={Link} to="/logout">Sign out</Nav.Link>
 	            	:
 	            	<>
-	            		<Nav.Link as={Link} to="/login">Login</Nav.Link>
-	            		<Nav.Link as={Link} to="/register">Register</Nav.Link>
+	            		<Nav.Link className="mx-3" as={Link} to="/login">Sign in</Nav.Link>
+	            		<Nav.Link className="mx-3" as={Link} to="/register">Register</Nav.Link>
 	            	</>
 	            }
 	          </Nav>

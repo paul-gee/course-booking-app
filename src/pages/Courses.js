@@ -1,5 +1,6 @@
 
 import { useEffect, useState, useContext } from 'react';
+import { Row } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import CourseCard from '../components/CourseCard';
 import UserContext from '../UserContext';
@@ -33,8 +34,10 @@ export default function Courses() {
 		<Navigate to="/admin"/>
 		:
 		<>
-			<h1 className="text-center my-5">Courses</h1>
-			{courses}
+			<h1 className="text-center my-5">Available Courses</h1>
+			<Row sm={1} md={2}>
+					{courses}
+			</Row>
 		</>
 	)
 }
