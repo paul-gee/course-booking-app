@@ -19,7 +19,7 @@ export default function CourseView(){
 
 	const enroll = (courseId) => {
 
-		fetch('http://localhost:4000/users/enroll', {
+		fetch(`${process.env.REACT_APP_API_URL}/users/enroll`, {
 			method:'POST',
 			headers:{
 				'Content-Type':'application/json',
@@ -55,7 +55,7 @@ export default function CourseView(){
 
 	useEffect(() => {
 		console.log(courseId);
-		fetch(`http://localhost:4000/courses/${courseId}`)
+		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`)
 		.then(res => res.json())
 		.then(data => {
 			setName(data.name);

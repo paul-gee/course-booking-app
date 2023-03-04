@@ -14,7 +14,7 @@ export default function Courses() {
 	console.log(user);
 
 	useEffect(() => {
-	fetch('http://localhost:4000/courses')
+	fetch(`${process.env.REACT_APP_API_URL}/courses`)
 	.then(res => res.json())
 	.then(data => {
 

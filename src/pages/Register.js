@@ -32,7 +32,7 @@ export default function Register() {
 
       e.preventDefault();
 
-      fetch('http://localhost:4000/users/checkEmail',{
+      fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`,{
         method: "POST",
         headers: {
           'Content-Type': 'application/json'
@@ -55,7 +55,7 @@ export default function Register() {
 
         } else {
 
-          fetch('http://localhost:4000/users/register',{
+          fetch(`${process.env.REACT_APP_API_URL}/users/register`,{
             method: "POST",
             headers: {
               'Content-Type': 'application/json'

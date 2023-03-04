@@ -21,7 +21,7 @@ export default function Login() {
 
       e.preventDefault()
 
-      fetch('http://localhost:4000/users/login', {
+      fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
         method: 'POST',
         headers: {
           'Content-Type':'application/json'
@@ -61,7 +61,7 @@ export default function Login() {
 
         //REACT_APP_API_URL=http://localhost:4000
 
-        fetch('http://localhost:4000/users/details', {
+        fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
           headers: {
             Authorization: `Bearer ${token}`
           }

@@ -14,7 +14,7 @@ export default function Dash(){
 
 	const fetchData = () =>{
 
-		fetch('http://localhost:4000/courses/all',{
+		fetch(`${process.env.REACT_APP_API_URL}/courses/all`,{
 			headers:{
 				"Authorization": `Bearer ${localStorage.getItem("token")}`
 			}
@@ -56,7 +56,7 @@ export default function Dash(){
 		console.log(courseId);
 		console.log(courseName);
 
-		fetch(`http://localhost:4000/courses/${courseId}/archive`,{
+		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}/archive`,{
 			method: "PUT",
 			headers:{
 				"Content-Type": "application/json",
@@ -92,7 +92,7 @@ export default function Dash(){
 		console.log(courseId);
 		console.log(courseName);
 
-		fetch(`http://localhost:4000/courses/${courseId}/active`,{
+		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}/active`,{
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",

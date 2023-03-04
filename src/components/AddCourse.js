@@ -22,7 +22,7 @@ export default function AddCourse() {
 
 	    e.preventDefault();
 
-	    fetch('http://localhost:4000/courses', {
+	    fetch(`${process.env.REACT_APP_API_URL}/courses`, {
 	    	method: "POST",
 	    	headers: {
 				"Content-Type": "application/json",
