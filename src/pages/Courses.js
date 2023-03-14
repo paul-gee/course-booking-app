@@ -1,7 +1,7 @@
 
 import { useEffect, useState, useContext } from 'react';
-import { Row } from "react-bootstrap";
-import { Navigate } from 'react-router-dom';
+import { Container, Row } from "react-bootstrap";
+// import { Navigate } from 'react-router-dom';
 import CourseCard from '../components/CourseCard';
 import UserContext from '../UserContext';
 
@@ -10,8 +10,6 @@ export default function Courses() {
 	const [courses, setCourses] =useState([])
 
 	const { user } = useContext(UserContext);
-
-	console.log(user);
 
 	useEffect(() => {
 	fetch(`${process.env.REACT_APP_API_URL}/courses`)
@@ -29,15 +27,12 @@ export default function Courses() {
 
 	}, [courses])
 
-	return(
-		(user.isAdmin)?
-		<Navigate to="/admin"/>
-		:
-		<>
-			<h1 className="text-center my-5">Available Courses</h1>
+	return (
+		<Container>
+			<h2 className="text-center my-5">Available Courses</h2>
 			<Row sm={1} md={2}>
 					{courses}
 			</Row>
-		</>
+		</Container>
 	)
 }

@@ -12,9 +12,6 @@ export default function Login() {
   const [password, setPassword] = useState ('');
   const [isActive, setIsActive] = useState ('');
 
-  console.log(email);
-  console.log(password);
-
   const { user, setUser } = useContext(UserContext);
 
   function authenticate(e) {
@@ -68,11 +65,15 @@ export default function Login() {
         })
         .then(res => res.json())
         .then(data => {
-          console.log(data);
-
+          
           setUser({
             id: data._id,
-            isAdmin: data.isAdmin
+            isAdmin: data.isAdmin,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            mobileNo: data.mobileNo,
+            enrollments: data.enrollments
           });
         })
       }
@@ -95,6 +96,7 @@ export default function Login() {
 
 
   return (
+    
     (user.id !== null)
     ?
     <Navigate to="/courses"/>

@@ -78,7 +78,7 @@ export default function EditCourse() {
 
     	console.log(courseId);
 
-    	fetch(`${process.env.REACT_APP_API_URL}/${courseId}`)
+    	fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`)
     	.then(res => res.json())
     	.then(data => {
 

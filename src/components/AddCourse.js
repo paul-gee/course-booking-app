@@ -1,9 +1,10 @@
+
+import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
 
 export default function AddCourse() {
 
@@ -14,9 +15,9 @@ export default function AddCourse() {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
+	const [isActive, setIsActive] = useState(false);
     // const [slots, setSlots] = useState(0);
 
-    const [isActive, setIsActive] = useState(false);
 
 	function addCourse(e) {
 

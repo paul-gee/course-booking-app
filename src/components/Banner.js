@@ -12,8 +12,8 @@ export default function Banner({bannerProp}){
 			<Row>
 				<Col>
 					<h1>{title}</h1>
-					<p>{content}</p>
-					<Button style={{width: "130px"}} as={Link} to={destination} variant="primary">{label}</Button>
+					<h5 className="my-4">{content}</h5>
+					<Button className="banner-button" as={Link} to={destination} variant="primary">{label}</Button>
 				</Col>
 			</Row>
 		</div>	

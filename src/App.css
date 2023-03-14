@@ -8,3 +8,44 @@
   padding:0;
   box-sizing: border-box;
 }
+
+:root {
+  --gray-bg: rgb(222, 226, 230);
+}
+
+.navbar,
+.table-row {
+    background: var(--gray-bg);
+}
+
+.nav-link {
+    font-size: 20px !important;
+    font-weight: 600 !important;
+}
+
+.navbar-brand {
+  font-size: 24px !important;
+  font-weight: 600;
+}
+
+.banner-button,
+.course-details-button,
+.course-edit-button,
+.enroll-button {
+  padding: 7px 30px !important;
+}
+
+.user-profile-label {
+  width: 75px;
+}
+
+@media (max-width: 992px) {
+  .hideOnSmall {
+    display: none;
+  }
+}
+
+.enrollees-table {
+  border: 5px black !important;
+
+}

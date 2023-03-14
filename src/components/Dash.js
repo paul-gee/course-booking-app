@@ -2,7 +2,6 @@ import { useContext, useState, useEffect } from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
 import { Navigate, Link } from "react-router-dom";
 import UserContext from "../UserContext";
-import '../css/Dash.css';
 
 import Swal from "sweetalert2";
 
@@ -12,7 +11,7 @@ export default function Dash(){
 
 	const [allCourses, setAllCourses] = useState([]);
 
-	const fetchData = () =>{
+	const fetchData = () => {
 
 		fetch(`${process.env.REACT_APP_API_URL}/courses/all`,{
 			headers:{
@@ -128,19 +127,20 @@ export default function Dash(){
 		fetchData();
 	})
 
-	return(
+	return (
+
 		(user.isAdmin)
 		?
 		<>
 			<div className="my-5 text-center">
-				<h1>Admin Dashboard</h1>
-				<Button as={Link} to="/addCourse" variant="primary" size="md" className="mx-2">Add Course</Button>
-				<Button variant="success" size="md" className="mx-2" disabled>Show Enrollments</Button>
+				<h3>Admin Dashboard</h3>
+				<Button as={Link} to="/addCourse" variant="primary" size="md" className="m-2">Add Course</Button>
+				<Button as={Link} to="/admin/enrollments" variant="secondary" size="md" className="m-2">Show Enrollments</Button>
 			</div>
 			<Table striped bordered hover className="text-center align-middle">
 		     <thead>
 		       <tr>
-		       	 <th> No</th>
+		       	 <th>#</th>
 		         <th className="hideOnSmall">Course ID</th>
 		         <th>Course Name</th>
 		         <th className="hideOnSmall">Description</th>
@@ -156,5 +156,6 @@ export default function Dash(){
 		</>
 		:
 		<Navigate to="/courses" />
+		
 	)
 }

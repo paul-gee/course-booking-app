@@ -83,7 +83,7 @@ export default function Register() {
               Swal.fire({
                 title: "Registration successful!",
                 icon: "success",
-                text: "Welcome to Zuitt!"
+                text: "Welcome to Course Booking!"
               })
 
               navigate("/login")

@@ -8,7 +8,9 @@ import CourseView from './components/CourseView';
 import Dash from './components/Dash';
 import AddCourse from './components/AddCourse';
 import EditCourse from './components/EditCourse';
+import Enrollments from './components/Enrollments';
 import Register from './pages/Register';
+import Account from './pages/Account';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
@@ -36,13 +38,17 @@ function App() {
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data);
 
-      if (typeof data._id !== "undefined") {
+      if (typeof data._id !== "undefined") {;
         setUser({
-          id: data._id,
-          isAdmin: data.isAdmin
-        });
+            id: data._id,
+            isAdmin: data.isAdmin,
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            mobileNo: data.mobileNo,
+            enrollments: data.enrollments
+          });
       } else {
         setUser ({
           id: null,
@@ -59,9 +65,11 @@ function App() {
           <Container>
             <Routes>
               <Route path="/" element={<Home/>}/>
+              <Route path="/users/details" element={<Account/>}/>
               <Route path="/admin" element={<Dash/>}/>
               <Route path="/addCourse" element={<AddCourse/>} />
               <Route path="/editCourse/:courseId" element={<EditCourse/>} />
+              <Route path="/admin/enrollments" element={<Enrollments/>}/>
               <Route path="/courses" element={<Courses/>}/>
               <Route path="/courses/:courseId" element={<CourseView/>}/>
               <Route path="/login" element={<Login/>}/>

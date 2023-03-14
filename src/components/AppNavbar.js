@@ -9,7 +9,7 @@ export default function AppNavbar(){
 	const { user } = useContext(UserContext);
 
 	return(
-		<Navbar className="my-3" expand="lg">
+		<Navbar className="navbar py-3 px-2" expand="lg">
 	      <Container>
 	        <Navbar.Brand as={Link} to="/">Course Booking</Navbar.Brand>
 	        <Navbar.Toggle aria-controls="basic-navbar-nav" />
@@ -17,9 +17,17 @@ export default function AppNavbar(){
 	          <Nav className="ms-auto">
 	            <Nav.Link className="mx-3" as={Link} to="/">Home</Nav.Link>
 	            <Nav.Link className="mx-3" as={Link} to="/courses">Courses</Nav.Link>
-
-	            {(user.id !== null) ?
+	            {
+	            	user.id !== null ?
+	            	<>
+	            	{
+		            	user.isAdmin ?
+		            	<Nav.Link className="mx-3" as={Link} to="/admin">Manage</Nav.Link>
+		            	:
+		            	<Nav.Link className="mx-3" as={Link} to="/users/details">Account</Nav.Link>
+	            	}
 	            	<Nav.Link className="mx-3" as={Link} to="/logout">Sign out</Nav.Link>
+	            	</>
 	            	:
 	            	<>
 	            		<Nav.Link className="mx-3" as={Link} to="/login">Sign in</Nav.Link>
