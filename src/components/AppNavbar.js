@@ -18,7 +18,12 @@ export default function AppNavbar(){
 	            <Nav.Link className="mx-3" as={Link} to="/">Home</Nav.Link>
 	            <Nav.Link className="mx-3" as={Link} to="/courses">Courses</Nav.Link>
 	            {
-	            	user.id !== null ?
+	            	user.id == null ?
+	            	<>
+	            		<Nav.Link className="mx-3" as={Link} to="/login">Sign in</Nav.Link>
+	            		<Nav.Link className="mx-3" as={Link} to="/register">Register</Nav.Link>
+	            	</>
+	            	:
 	            	<>
 	            	{
 		            	user.isAdmin ?
@@ -27,11 +32,6 @@ export default function AppNavbar(){
 		            	<Nav.Link className="mx-3" as={Link} to="/users/details">Account</Nav.Link>
 	            	}
 	            	<Nav.Link className="mx-3" as={Link} to="/logout">Sign out</Nav.Link>
-	            	</>
-	            	:
-	            	<>
-	            		<Nav.Link className="mx-3" as={Link} to="/login">Sign in</Nav.Link>
-	            		<Nav.Link className="mx-3" as={Link} to="/register">Register</Nav.Link>
 	            	</>
 	            }
 	          </Nav>

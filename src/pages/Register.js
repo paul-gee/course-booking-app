@@ -116,10 +116,6 @@ export default function Register() {
 
 
   return (
-    (user.id !== null)
-    ?
-    <Navigate to="/courses"/>
-    :
     <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
       <h5 className="text-center py-2" style={{color:"green"}}>Register to Get Started</h5>
       <Card>

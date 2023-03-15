@@ -109,8 +109,10 @@ export default function CourseView(){
 						<Card.Subtitle>General Class Schedule:</Card.Subtitle>
 						<Card.Text>8:00AM to 5:00PM</Card.Text>
 						{
-							(user.id!==null)?
-								(user.isAdmin === true) ?
+							(user.id == null) ?
+							<Link className="btn btn-danger" to="/login">Log in to Enroll</Link>
+							:
+							(user.isAdmin === true) ?
 								<Button 
 									className="course-edit-button mt-1 px-3"
 									as={ Link } to={`/editCourse/${courseId}`}
@@ -142,8 +144,6 @@ export default function CourseView(){
 									</>
 								}
 								</>
-							:
-							<Link className="btn btn-danger" to="/login">Log in to Enroll</Link>
 						}
 					</Card.Body>
 				</Card>

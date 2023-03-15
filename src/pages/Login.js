@@ -2,7 +2,7 @@ import {Card, Form, Button, Col, Container } from 'react-bootstrap';
 //Complete (3) Hooks of React
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../UserContext';
-import { Navigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
@@ -13,6 +13,7 @@ export default function Login() {
   const [isActive, setIsActive] = useState ('');
 
   const { user, setUser } = useContext(UserContext);
+  const navigate = useNavigate();
 
   function authenticate(e) {
 
@@ -80,6 +81,7 @@ export default function Login() {
 
       setEmail("");
       setPassword("");
+      navigate("/courses")
 
   }
 
@@ -97,10 +99,6 @@ export default function Login() {
 
   return (
     
-    (user.id !== null)
-    ?
-    <Navigate to="/courses"/>
-    :
     <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
       <h5 className="text-center py-2" style={{color:"green"}}>Sign in to Course Booking</h5>
       <Card>
