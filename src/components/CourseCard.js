@@ -8,9 +8,9 @@ export default function CourseCard({courseProp}){
 
 	return(
 		<Container className="p-3 mb-3">
-			<Card className="h-100">
+			<Card className="course-card h-100 p-3">
 				<Card.Body className="d-flex flex-column">
-					<Card.Title>{name}</Card.Title>
+					<Card.Title className="course-card-title">{name}</Card.Title>
 					<Card.Subtitle className="mt-2">Description:</Card.Subtitle>
 					<Card.Text>{description}</Card.Text>
 					<Card.Subtitle>Price:</Card.Subtitle>

@@ -117,15 +117,15 @@ export default function Register() {
 
   return (
     <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
-      <h5 className="text-center py-2" style={{color:"green"}}>Register to Get Started</h5>
-      <Card>
-        <Card.Body className="">
+      <h4 className="register-title text-center py-2">Register to Get Started</h4>
+      <Card className="signup-card px-2">
+        <Card.Body>
           <Form onSubmit={e => registerUser(e)}>
             <Form.Group className="mb-3" controlId="firstName">
               <Form.Label>First Name</Form.Label>
               <Form.Control
               type="text"
-              placeholder="Enter First Name"
+              placeholder="Enter first name"
               value={firstName}
               onChange={e => setFirstName(e.target.value)}
               required
@@ -136,7 +136,7 @@ export default function Register() {
               <Form.Label>Last Name</Form.Label>
               <Form.Control
               type="text"
-              placeholder="Enter Last Name"
+              placeholder="Enter last name"
               value={lastName}
               onChange={e => setLastName(e.target.value)}
               required
@@ -161,7 +161,7 @@ export default function Register() {
               <Form.Label>Mobile Number</Form.Label>
               <Form.Control
               type="text"
-              placeholder="Enter Mobile Number"
+              placeholder="Enter mobile number"
               value={mobileNo}
               onChange={e => setMobileNo(e.target.value)}
               required
@@ -183,7 +183,7 @@ export default function Register() {
               <Form.Label>Password</Form.Label>
               <Form.Control
               type="password"
-              placeholder="Verify Password"
+              placeholder="Verify password"
               value={password2}
               onChange={e => setPassword2(e.target.value)}
               required/>

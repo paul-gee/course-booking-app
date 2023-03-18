@@ -1,5 +1,4 @@
 import {Card, Form, Button, Col, Container } from 'react-bootstrap';
-//Complete (3) Hooks of React
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../UserContext';
 import { Navigate, useNavigate } from 'react-router-dom';
@@ -93,22 +92,21 @@ export default function Login() {
       setIsActive(false)
     }
  
-
   }, [email, password])
 
 
   return (
     
     <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
-      <h5 className="text-center py-2" style={{color:"green"}}>Sign in to Course Booking</h5>
-      <Card>
-        <Card.Body className="">
+      <h4 className="login-title text-center py-2">Sign in to Course Booking</h4>
+      <Card className="login-card px-2">
+        <Card.Body>
           <Form onSubmit={e => authenticate(e)}>
             <Form.Group className="mb-3" controlId="userEmail">
             <Form.Label>Email address</Form.Label>
             <Form.Control
               type="email"
-              placeholder="Enter your email"
+              placeholder="Enter email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -119,7 +117,7 @@ export default function Login() {
               <Form.Label>Password</Form.Label>
               <Form.Control
               type="password"
-              placeholder="Password"
+              placeholder="Enter password"
               value={password}
               onChange={e => setPassword(e.target.value)}
               required
@@ -137,7 +135,6 @@ export default function Login() {
             </Button>
             }
             </Container>
-
           </Form>
         </Card.Body>
       </Card>

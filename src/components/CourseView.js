@@ -96,12 +96,11 @@ export default function CourseView(){
      })
 
 	return (
-		<Container className="mt-5">
-		  <Row>
-		     <Col lg={{span:6, offset:3}}>
-				<Card>
+		<Container className="mt-5 py-5">
+			<Col lg={{span:6, offset:3}}>
+				<Card className="view-course-card p-3">
 					<Card.Body>
-						<Card.Title>{name}</Card.Title>
+						<Card.Title className="course-card-title">{name}</Card.Title>
 						<Card.Subtitle className="mt-3">Description:</Card.Subtitle>
 						<Card.Text>{description}</Card.Text>
 						<Card.Subtitle>Price:</Card.Subtitle>
@@ -110,7 +109,7 @@ export default function CourseView(){
 						<Card.Text>8:00AM to 5:00PM</Card.Text>
 						{
 							(user.id == null) ?
-							<Link className="btn btn-danger" to="/login">Log in to Enroll</Link>
+							<Link className="btn btn-login" to="/login">Log in to enroll</Link>
 							:
 							(user.isAdmin === true) ?
 								<Button 
@@ -147,8 +146,7 @@ export default function CourseView(){
 						}
 					</Card.Body>
 				</Card>
-		     </Col>
-		  </Row>
+			</Col>
 		</Container>
 	)
 }

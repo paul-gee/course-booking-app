@@ -1,6 +1,6 @@
 
 import { useContext } from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
+import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import UserContext from '../UserContext';
 
@@ -9,29 +9,33 @@ export default function AppNavbar(){
 	const { user } = useContext(UserContext);
 
 	return(
-		<Navbar className="navbar py-3 px-2" expand="lg">
+		<Navbar className="py-3 px-2" expand="lg" collapseOnSelect>
 	      <Container>
 	        <Navbar.Brand as={Link} to="/">Course Booking</Navbar.Brand>
 	        <Navbar.Toggle aria-controls="basic-navbar-nav" />
 	        <Navbar.Collapse id="basic-navbar-nav">
-	          <Nav className="ms-auto">
-	            <Nav.Link className="mx-3" as={Link} to="/">Home</Nav.Link>
-	            <Nav.Link className="mx-3" as={Link} to="/courses">Courses</Nav.Link>
+	          <Nav className="d-flex align-items-center ms-auto">
+	            <Nav.Link className="mx-2" as={Link} to="/" eventKey="1">Home</Nav.Link>
+	            <Nav.Link className="mx-2" as={Link} to="/courses" eventKey="2">Courses</Nav.Link>
 	            {
 	            	user.id == null ?
 	            	<>
-	            		<Nav.Link className="mx-3" as={Link} to="/login">Sign in</Nav.Link>
-	            		<Nav.Link className="mx-3" as={Link} to="/register">Register</Nav.Link>
+	            		<Nav.Link className="mx-1" as={Link} to="/login" eventKey="3">
+	            			<Button className="nav-login">Log in</Button>
+	            		</Nav.Link>
+	            		<Nav.Link className="mx-1" as={Link} to="/register" eventKey="4">
+	            			<Button className="nav-signup">Sign Up</Button>
+	            		</Nav.Link>
 	            	</>
 	            	:
 	            	<>
 	            	{
 		            	user.isAdmin ?
-		            	<Nav.Link className="mx-3" as={Link} to="/admin">Manage</Nav.Link>
+		            	<Nav.Link className="mx-2" as={Link} to="/admin" eventKey="5">Manage</Nav.Link>
 		            	:
-		            	<Nav.Link className="mx-3" as={Link} to="/users/details">Account</Nav.Link>
+		            	<Nav.Link className="mx-2" as={Link} to="/users/details" eventKey="6">Account</Nav.Link>
 	            	}
-	            	<Nav.Link className="mx-3" as={Link} to="/logout">Sign out</Nav.Link>
+	            	<Nav.Link className="mx-2" as={Link} to="/logout">Sign out</Nav.Link>
 	            	</>
 	            }
 	          </Nav>

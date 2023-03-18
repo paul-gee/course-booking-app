@@ -29,7 +29,7 @@ export default function Courses() {
 
 	return (
 		<Container>
-			<h2 className="text-center my-5">Available Courses</h2>
+			<h3 className="page-header text-center my-5 pt-2">Available Courses</h3>
 			<Row sm={1} md={2}>
 					{courses}
 			</Row>

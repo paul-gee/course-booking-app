@@ -8,14 +8,10 @@ export default function Banner({bannerProp}){
 	const {title, content, destination, label} = bannerProp;
 
 	return (
-		<div className="text-center my-5">
-			<Row>
-				<Col>
-					<h1>{title}</h1>
-					<h5 className="my-4">{content}</h5>
-					<Button className="banner-button" as={Link} to={destination} variant="primary">{label}</Button>
-				</Col>
-			</Row>
+		<div className="text-center my-5 py-3">
+			<h2 className="page-header">{title}</h2>
+			<h6 className="my-4">{content}</h6>
+			<Button className="banner-button" as={Link} to={destination} variant="primary">{label}</Button>
 		</div>	
 	)
 }
