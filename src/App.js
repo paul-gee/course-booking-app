@@ -14,6 +14,7 @@ import Account from './pages/Account';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
+import Footer from './components/Footer'
 import { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
 import './App.css';
@@ -62,7 +63,7 @@ function App() {
     <UserProvider value = {{user, setUser, unsetUser}}>
         <Router>
           <AppNavbar/>
-          <Container>
+          <Container className="main-container">
             <Routes>
               <Route path="/" element={<Home/>}/>
               <Route path="/users/details" element={<Account/>}/>
@@ -78,6 +79,7 @@ function App() {
               <Route path="*" element={<Error/>}/>
             </Routes>
           </Container>
+          <Footer/>
         </Router>
     </UserProvider>
   );

@@ -1,21 +1,20 @@
 // import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Card, Button, Container } from 'react-bootstrap';
+import { formatPrice } from '../utils.js'
 
 export default function CourseCard({courseProp}){
 
-	let { name, description, price, _id } = courseProp;
+	let { name, price, _id } = courseProp;
 
-	return(
+	return (
 		<Container className="p-3 mb-3">
-			<Card className="course-card h-100 p-3">
+			<Card className="course-card text-center p-3 h-100">
 				<Card.Body className="d-flex flex-column">
 					<Card.Title className="course-card-title">{name}</Card.Title>
-					<Card.Subtitle className="mt-2">Description:</Card.Subtitle>
-					<Card.Text>{description}</Card.Text>
-					<Card.Subtitle>Price:</Card.Subtitle>
-					<Card.Text>PHP {price}</Card.Text>
-					<Button className="course-details-button mt-auto mx-auto" as={Link} to={`/courses/${_id}`}>Details</Button>
+					<Card.Subtitle className="mt-2 text-muted">Price:</Card.Subtitle>
+					<Card.Text className="course-card-price">{formatPrice(price)}</Card.Text>
+					<Button className="mt-auto mx-auto" as={Link} to={`/courses/${_id}`} variant="primary">More Details</Button>
 				</Card.Body>
 			</Card>
 		</Container>

@@ -1,10 +1,8 @@
 
-import { useState, useEffect } from 'react';
-import React from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Card, Table } from 'react-bootstrap';
-import { useContext } from 'react';
-import UserContext from '../UserContext';
 import { Navigate } from 'react-router-dom';
+import UserContext from '../UserContext';
 
 
 export default function Enrollments() {
@@ -24,8 +22,6 @@ export default function Enrollments() {
         .then(data => setCourseData(data));
 
 	}, []);
-
-	console.log(courseData)
 		
 	function createEnrolleesTable () {
 
@@ -45,10 +41,10 @@ export default function Enrollments() {
 					<h5>Course Enrollees Record</h5>
 					<h6><em>(Click a course to show enrollee record.)</em></h6>
 				</Card.Header>
-				<Card.Body>
-			      <Table className="enrollees-table">
+				<Card.Body className="admin-enrollees-table-container">
+			      <Table className="admin-enrollees-table align-middle">
 					<thead>
-						<tr>
+						<tr className="admin-enrollees-table-header align-middle">
 							<th> # </th>
 							<th> Course Name </th>
 							<th> Course ID </th>
@@ -60,7 +56,7 @@ export default function Enrollments() {
 							return (
 								<React.Fragment key={index}>
 									<tr
-										className="table-row"
+										className="table-row admin-enrollees-course-row"
 										onClick={() => toggleCollapsibleRow(index)}
 									>
 									<th>{index + 1}  &crarr;</th>
@@ -74,31 +70,31 @@ export default function Enrollments() {
 											course.enrollees.length === 0 ?
 											<h6 className="text-center py-2"> No Enrollees Yet </h6>
 											:
-												<Table width="100%">
-													<thead>
-														<tr>
-															<th width="8%">#</th>
-															<th width="32%">Enrollee ID</th>
-															<th width="30%">Name</th>
-															<th width="30%">Enrolled On</th>
-														</tr>
-													</thead>
-													<tbody>
-														{course.enrollees.map((enrollee, i) => {
-															const enrolleeEntries = Object.values(enrollee).slice(0, 3);
-															return (
-																<tr key={i}>
-																<th>{i + 1}</th>
-																	{enrolleeEntries.map((value) => (
-																		<React.Fragment key={i}>
-																			<td>{value}</td>
-																		</React.Fragment>
-																	))}
-																</tr>
-															);
-														})}
-													</tbody>
-												</Table>
+											<Table width="100%" className="align-middle">
+												<thead>
+													<tr>
+														<th width="8%">#</th>
+														<th width="32%">Enrollee ID</th>
+														<th width="30%">Name</th>
+														<th width="30%">Enrolled On</th>
+													</tr>
+												</thead>
+												<tbody>
+													{course.enrollees.map((enrollee, i) => {
+														const enrolleeEntries = Object.values(enrollee).slice(0, 3);
+														return (
+															<tr key={i}>
+															<th>{i + 1}</th>
+																{enrolleeEntries.map((value, j) => (
+																	<React.Fragment key={j}>
+																		<td>{value}</td>
+																	</React.Fragment>
+																))}
+															</tr>
+														);
+													})}
+												</tbody>
+											</Table>
 											}
 										</td>
 									</tr>

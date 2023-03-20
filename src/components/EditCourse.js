@@ -1,14 +1,13 @@
-import { useState, useEffect, useContext } from 'react';
-import { Navigate, Link, useParams, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
-import UserContext from '../UserContext';
-
 import { Form, Button, Container, Card, Row, Col } from 'react-bootstrap';
+import { Navigate, Link, useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect, useContext } from 'react';
+import UserContext from '../UserContext';
+import Swal from 'sweetalert2';
+
 
 export default function EditCourse() {
 
 	const { user } = useContext(UserContext);
-
 	const { courseId } = useParams();
 
 	const navigate = useNavigate();
@@ -16,7 +15,6 @@ export default function EditCourse() {
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
-
     const [isActive, setIsActive] = useState(false);
 
 	function editCourse(e) {
@@ -39,20 +37,21 @@ export default function EditCourse() {
 	    .then(data => {
 	    	console.log(data);
 
-	    	if(data){
+	    	if (data) {
 	    		Swal.fire({
 	    		    title: "Course succesfully Updated",
 	    		    icon: "success",
-	    		    text: `${name} is now updated`
+	    		    text: `${name} is now updated`,
+	    		    confirmButtonColor: "#23857a"
 	    		});
 
 	    		navigate("/admin");
-	    	}
-	    	else{
+	    	} else {
 	    		Swal.fire({
 	    		    title: "Error!",
 	    		    icon: "error",
-	    		    text: `Something went wrong. Please try again later!`
+	    		    text: `Something went wrong. Please try again later!`,
+	    		    confirmButtonColor: "#23857a"
 	    		});
 	    	}
 
@@ -96,9 +95,8 @@ export default function EditCourse() {
     return (
 
     	<Container className="mt-5">
-		  <Row>
 		     <Col lg={{span:6, offset:3}}>
-				<Card className="p-3">
+				<Card className="editcourse-card p-4">
 					{ user.isAdmin ?
 					<>
 			    	<h3 className="my-3 text-center">Edit Course</h3>
@@ -154,11 +152,11 @@ export default function EditCourse() {
 		        	    		Update
 		        	    	</Button>
 		        	        : 
-		        	        <Button variant="danger" type="submit" id="submitBtn" disabled>
+		        	        <Button variant="primary" type="submit" id="submitBtn" disabled>
 		        	        	Update
 		        	        </Button>
 		        	    }
-		        	    	<Button className="m-2" as={Link} to="/admin" variant="success" type="submit" id="submitBtn">
+		        	    	<Button className="m-2" as={Link} to="/admin" variant="secondary" type="submit" id="submitBtn">
 		        	    		Cancel
 		        	    	</Button>
 			        </Form>
@@ -168,7 +166,6 @@ export default function EditCourse() {
 		    		}
 				</Card>
 		     </Col>
-		  </Row>
 		</Container>
     )
 

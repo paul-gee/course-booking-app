@@ -3,6 +3,7 @@ import { useEffect, useState, useContext } from 'react';
 import { Container, Row, Card, Table, InputGroup, Form } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import UserContext from '../UserContext';
+import { formatPrice, formatDate } from '../utils.js';
 
 export default function Courses() {
 
@@ -10,8 +11,6 @@ export default function Courses() {
 	const [enrollmentData, setEnrollmentData] =useState([])
 
 	useEffect(() => {
-
-		console.log(user)
 
 		fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
         	headers:{
@@ -21,15 +20,15 @@ export default function Courses() {
         .then(res => res.json())
         .then(data => {
 
-			const enrollmentArr = (data.enrollments.map((enrollments, index) => {
+			const enrollmentArr = (data.enrollments.reverse().map((enrollments, index) => {
 
 				return (
 						<tr key={enrollments._id}>
 							<td>{index + 1}</td>
 							<td className="hideOnSmall">{enrollments.courseId}</td>
 							<td>{enrollments.name}</td>
-							<td className="hideOnSmall">{enrollments.price}</td>
-							<td className="hideOnSmall">{enrollments.enrolledOn}</td>
+							<td className="hideOnSmall">{formatPrice(enrollments.price)}</td>
+							<td className="hideOnSmall">{formatDate(enrollments.enrolledOn)}</td>
 							<td>{enrollments.status}</td>
 						</tr>
 				)
@@ -46,7 +45,7 @@ export default function Courses() {
 		<>
 		<Row className="mt-5">
 		<Container className="d-flex">
-		 <Card className="mx-auto">
+		 <Card className="user-profile-card mx-auto">
 		 	<Card.Header>
 		 		Profile
 		 	</Card.Header>
@@ -81,12 +80,12 @@ export default function Courses() {
 		</Row>
  
 		<Row className="mt-5">
-		 <Card>
+		 <Card className="user-enrollments-card">
 		 	<Card.Header>
 		 		Enrollments
 		 	</Card.Header>
 		 	<Card.Body>
-		 		<Table striped bordered hover className="text-center align-middle">
+		 		<Table className="user-enrollments-table text-center align-middle" striped hover>
 					<thead>
 						<tr>
 							<th>#</th>

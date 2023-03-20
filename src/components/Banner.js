@@ -11,7 +11,7 @@ export default function Banner({bannerProp}){
 		<div className="text-center my-5 py-3">
 			<h2 className="page-header">{title}</h2>
 			<h6 className="my-4">{content}</h6>
-			<Button className="banner-button" as={Link} to={destination} variant="primary">{label}</Button>
+			<Button as={Link} to={destination} variant="primary">{label}</Button>
 		</div>	
 	)
 }

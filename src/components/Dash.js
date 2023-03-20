@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
 import { Navigate, Link } from "react-router-dom";
 import UserContext from "../UserContext";
+import { formatPrice } from '../utils.js';
 
 import Swal from "sweetalert2";
 
@@ -28,13 +29,13 @@ export default function Dash(){
 						<td className="hideOnSmall">{course._id}</td>
 						<td>{course.name}</td>
 						<td className="hideOnSmall">{course.description}</td>
-						<td className="hideOnSmall">{course.price}</td>
+						<td className="hideOnSmall">{formatPrice(course.price)}</td>
 						<td>{course.isActive ? "Active" : "Inactive"}</td>
 						<td>
 							<ButtonGroup vertical>
 								{ 
 									(course.isActive) ?
-									<Button variant="danger" size="sm" onClick={() => archive(course._id, course.name)}>Archive</Button>
+									<Button variant="dark" size="sm" onClick={() => archive(course._id, course.name)}>Archive</Button>
 									:
 									<Button variant="success" size="sm" onClick={() => unarchive(course._id, course.name)}>Unarchive</Button>
 								}
@@ -69,19 +70,20 @@ export default function Dash(){
 		.then(data =>{
 			console.log(data);
 
-			if(data){
+			if (data) {
 				Swal.fire({
 					title: "Archive Succesful!",
 					icon: "success",
-					text: `${courseName} is now inactive.`
+					text: `${courseName} is now inactive.`,
+					confirmButtonColor: "#23857a"
 				})
 				fetchData();
-			}
-			else{
+			} else {
 				Swal.fire({
 					title: "Archive Unsuccessful!",
 					icon: "error",
-					text: `Something went wrong. Please try again later!`
+					text: `Something went wrong. Please try again later!`,
+					confirmButtonColor: "#23857a"
 				})
 			}
 		})
@@ -105,19 +107,20 @@ export default function Dash(){
 		.then(data => {
 			console.log(data);
 
-			if(data){
+			if (data) {
 				Swal.fire({
 					title: "Unarchive Succesful!",
 					icon: "success",
-					text: `${courseName} is now active.`
+					text: `${courseName} is now active.`,
+					confirmButtonColor: "#23857a"
 				})
 				fetchData();
-			}
-			else{
+			} else {
 				Swal.fire({
 					title: "Unarchive Unsuccessful!",
 					icon: "error",
-					text: "Something went wrong. Please try again later!"
+					text: "Something went wrong. Please try again later!",
+					confirmButtonColor: "#23857a"
 				})
 			}
 		})
@@ -133,20 +136,20 @@ export default function Dash(){
 		?
 		<>
 			<div className="my-5 text-center">
-				<h3>Admin Dashboard</h3>
-				<Button as={Link} to="/addCourse" variant="primary" size="md" className="m-2">Add Course</Button>
+				<h3 className="page-header">Admin Dashboard</h3>
+				<Button className="m-2" as={Link} to="/addCourse" variant="primary" size="md">Add Course</Button>
 				<Button as={Link} to="/admin/enrollments" variant="secondary" size="md" className="m-2">Show Enrollments</Button>
 			</div>
-			<Table striped bordered hover className="text-center align-middle">
-		     <thead>
+			<Table className="admin-course-table text-center align-middle" width="100%" striped hover>
+		     <thead className="align-middle">
 		       <tr>
-		       	 <th>#</th>
-		         <th className="hideOnSmall">Course ID</th>
-		         <th>Course Name</th>
-		         <th className="hideOnSmall">Description</th>
-		         <th className="hideOnSmall">Price</th>
-		         <th>Status</th>
-		         <th>Action</th>
+		       	 <th width="5%">#</th>
+		         <th className="hideOnSmall" width="13%">Course ID</th>
+		         <th width="17%">Course Name</th>
+		         <th className="hideOnSmall" width="35%">Description</th>
+		         <th className="hideOnSmall" width="12%">Price</th>
+		         <th width="8%">Status</th>
+		         <th width="10%">Action</th>
 		       </tr>
 		     </thead>
 		     <tbody>

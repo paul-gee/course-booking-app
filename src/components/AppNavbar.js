@@ -21,10 +21,10 @@ export default function AppNavbar(){
 	            	user.id == null ?
 	            	<>
 	            		<Nav.Link className="mx-1" as={Link} to="/login" eventKey="3">
-	            			<Button className="nav-login">Log in</Button>
+	            			<Button className="nav-login" variant="light">Log in</Button>
 	            		</Nav.Link>
 	            		<Nav.Link className="mx-1" as={Link} to="/register" eventKey="4">
-	            			<Button className="nav-signup">Sign Up</Button>
+	            			<Button className="nav-signup" variant="light">Sign Up</Button>
 	            		</Nav.Link>
 	            	</>
 	            	:

@@ -1,29 +1,23 @@
 import { useState, useEffect, useContext } from 'react';
-import { Container, Card, Button, Row, Col } from 'react-bootstrap';
+import { Container, Card, Button, Col } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
+import { formatPrice } from '../utils.js'
 
 
 export default function CourseView(){
 
 	const { user, setUser } = useContext(UserContext);
+	const { courseId } = useParams();
 
 	const navigate = useNavigate();
-
-	const { courseId } = useParams();
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [price, setPrice] = useState(0);
 
 	const enroll = (courseId, name, price, firstName, lastName) => {
-
-		console.log(courseId)
-		console.log(name)
-		console.log(firstName)
-		console.log(lastName)
-		console.log(price)
 
 		fetch(`${process.env.REACT_APP_API_URL}/users/enroll`, {
 			method:'POST',
@@ -46,7 +40,8 @@ export default function CourseView(){
 				Swal.fire({
 				  title: "Enrollment Successful!",
 				  icon: "success",
-				  text: "Thank you for enrolling!"
+				  text: "Thank you for enrolling!",
+				  confirmButtonColor: "#23857a"
 				});
 				navigate("/courses")
 
@@ -55,7 +50,8 @@ export default function CourseView(){
 				Swal.fire({
 				  title: "Something went wrong!",
 				  icon: "error",
-				  text: "Check your credentials!"
+				  text: "Check your credentials!",
+				  confirmButtonColor: "#23857a"
 				});
 
 			}
@@ -99,21 +95,24 @@ export default function CourseView(){
 		<Container className="mt-5 py-5">
 			<Col lg={{span:6, offset:3}}>
 				<Card className="view-course-card p-3">
-					<Card.Body>
+					<Card.Body className="d-flex flex-column">
 						<Card.Title className="course-card-title">{name}</Card.Title>
 						<Card.Subtitle className="mt-3">Description:</Card.Subtitle>
 						<Card.Text>{description}</Card.Text>
 						<Card.Subtitle>Price:</Card.Subtitle>
-						<Card.Text>PHP {price}</Card.Text>
-						<Card.Subtitle>General Class Schedule:</Card.Subtitle>
-						<Card.Text>8:00AM to 5:00PM</Card.Text>
+						<Card.Text>{formatPrice(price)}</Card.Text>
+						<Card.Subtitle>Class Schedules (Mon-Fri):</Card.Subtitle>
+						<Card.Text>
+							A: 2 Months - 8:00AM to 5:00PM <br/>
+							B: 3 Months - 5:30PM to 9:30PM
+						</Card.Text>
 						{
 							(user.id == null) ?
-							<Link className="btn btn-login" to="/login">Log in to enroll</Link>
+							<Link className="btn btn-login mx-auto mt-3" to="/login">Log in to enroll</Link>
 							:
 							(user.isAdmin === true) ?
 								<Button 
-									className="course-edit-button mt-1 px-3"
+									className="mt-1 px-3 mx-auto"
 									as={ Link } to={`/editCourse/${courseId}`}
 									variant="primary"
 									size="sm"
@@ -125,7 +124,7 @@ export default function CourseView(){
 								{
 									(user.enrollments.findIndex(i => i.courseId === courseId) === -1) ?
 									<Button 
-										className="enroll-button"
+										className="mx-auto mt-3"
 										variant="primary"
 										onClick={()=>enroll(courseId, name, price, user.firstName, user.lastName)}
 									>
@@ -134,11 +133,11 @@ export default function CourseView(){
 									:
 									<>
 									<Button 
-										className="enroll-button"
-										variant="warning"
+										className="mx-auto mt-3"
+										variant="primary"
 										disabled
 									>
-										Currently Enrolled
+										Enrolled
 									</Button>
 									</>
 								}

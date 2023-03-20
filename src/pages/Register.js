@@ -1,105 +1,101 @@
 
 import { Card, Form, Button, Col, Container } from 'react-bootstrap'
-
-import { useState, useEffect, useContext } from 'react';
-import UserContext from '../UserContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
+// import { useContext } from 'react';
+// import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 
 export default function Register() {
 
-  const { user } = useContext(UserContext);
+  // const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
 
-    const [firstName, setFirstName] = useState('');
-    const [lastName, setLastName] = useState('');
-    const [email, setEmail] = useState('');
-    const [mobileNo, setMobileNo] = useState('');
-    const [password1, setPassword1] = useState('');
-    const [password2, setPassword2] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+  const [email, setEmail] = useState('');
+  const [mobileNo, setMobileNo] = useState('');
+  const [password1, setPassword1] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [isActive, setIsActive] = useState(false);
 
-    const [isActive, setIsActive] = useState(false);
+  function registerUser(e){
 
-    console.log(firstName);
-    console.log(lastName);
-    console.log(email);
-    console.log(mobileNo);
-    console.log(password1);
-    console.log(password2);
+    e.preventDefault();
 
-    function registerUser(e){
-
-      e.preventDefault();
-
-      fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`,{
-        method: "POST",
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: email
-        })
+    fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`,{
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        email: email
       })
-      .then(res => res.json())
-      .then(data => {
-        console.log(data)
+    })
+    .then(res => res.json())
+    .then(data => {
+      console.log(data)
 
-        if (data === true) {
+      if (data === true) {
+
+          Swal.fire({
+          title: "Duplicate Email Found!",
+          icon: "error",
+          text: "Kindly provide another email to complete the registration!",
+          confirmButtonColor: "#23857a"
+        })
+
+      } else {
+
+        fetch(`${process.env.REACT_APP_API_URL}/users/register`,{
+          method: "POST",
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            firstName: firstName,
+            lastName: lastName,
+            email: email,
+            mobileNo: mobileNo,
+            password: password1
+          })
+        })
+        .then(res => res.json())
+        .then(data => {
+
+          if (data === true) {
+
+            setFirstName("");
+            setLastName("");
+            setEmail("");
+            setMobileNo("");
+            setPassword1("");
+            setPassword2("");
 
             Swal.fire({
-            title: "Duplicate Email Found!",
-            icon: "error",
-            text: "Kindly provide another email to complete the registration!"
-          })
-
-        } else {
-
-          fetch(`${process.env.REACT_APP_API_URL}/users/register`,{
-            method: "POST",
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-              firstName: firstName,
-              lastName: lastName,
-              email: email,
-              mobileNo: mobileNo,
-              password: password1
+              title: "Registration successful!",
+              icon: "success",
+              text: "Welcome to Course Booking!",
+              confirmButtonColor: "#23857a"
             })
+
+            navigate("/login")
+
+          } else {
+
+            Swal.fire({
+              title: "Something went wrong!",
+              icon: "error",
+              text: "Please try again!",
+              confirmButtonColor: "#23857a"
+
           })
-          .then(res => res.json())
-          .then(data => {
-
-            if (data === true) {
-
-              setFirstName("");
-              setLastName("");
-              setEmail("");
-              setMobileNo("");
-              setPassword1("");
-              setPassword2("");
-
-              Swal.fire({
-                title: "Registration successful!",
-                icon: "success",
-                text: "Welcome to Course Booking!"
-              })
-
-              navigate("/login")
-
-            } else {
-
-              Swal.fire({
-                title: "Something went wrong!",
-                icon: "error",
-                text: "Please try again!"
-
-            })
-          }
-        })
-      }
-    })
+        }
+      })
+    }
+  })
 
   }
 
@@ -191,11 +187,11 @@ export default function Register() {
 
             <Container className="text-center">
               { isActive ?      
-                  <Button variant="success" type="submit" id="submitBtn">
+                  <Button variant="primary" type="submit" id="submitBtn">
                       Create Account
                   </Button>
                 :
-                  <Button variant="danger" type="submit" id="submitBtn" disabled>
+                  <Button variant="primary" type="submit" id="submitBtn" disabled>
                       Create Account
                   </Button>
               }

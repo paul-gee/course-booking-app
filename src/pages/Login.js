@@ -40,15 +40,19 @@ export default function Login() {
           Swal.fire({
             title: "Login Successful!",
             icon: "success",
-            text: "Welcome to Course Booking!"
+            text: "Welcome to Course Booking!",
+            confirmButtonColor: "#23857a"
           });
+
+          navigate("/courses")
 
         } else {
 
           Swal.fire({
             title: "Authentication Failed!",
             icon: "error",
-            text: "Check your credentials!" 
+            text: "Check your credentials!",
+            confirmButtonColor: "#23857a" 
           });
           
         }
@@ -77,11 +81,8 @@ export default function Login() {
           });
         })
       }
-
       setEmail("");
       setPassword("");
-      navigate("/courses")
-
   }
 
   useEffect(() => {
@@ -126,12 +127,12 @@ export default function Login() {
 
             <Container className="text-center">
             { isActive ?
-            <Button variant="success" type="submit" id="submitBtn">
-              Sign in
+            <Button variant="primary" type="submit" id="submitBtn">
+              Log in
             </Button>
             :
-            <Button variant="danger" type="submit" id="submitBtn" disabled>
-              Sign in
+            <Button variant="primary" type="submit" id="submitBtn" disabled>
+              Log in
             </Button>
             }
             </Container>

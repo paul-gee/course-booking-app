@@ -1,15 +1,15 @@
 
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { Container, Row } from "react-bootstrap";
-// import { Navigate } from 'react-router-dom';
 import CourseCard from '../components/CourseCard';
-import UserContext from '../UserContext';
+// import { Navigate } from 'react-router-dom';
+// import UserContext from '../UserContext';
+// import { useContext } from 'react';
 
 export default function Courses() {
 
-	const [courses, setCourses] =useState([])
-
-	const { user } = useContext(UserContext);
+	// const { user } = useContext(UserContext);
+	const [courses, setCourses] =useState([])	
 
 	useEffect(() => {
 	fetch(`${process.env.REACT_APP_API_URL}/courses`)
@@ -29,8 +29,8 @@ export default function Courses() {
 
 	return (
 		<Container>
-			<h3 className="page-header text-center my-5 pt-2">Available Courses</h3>
-			<Row sm={1} md={2}>
+			<h3 className="page-header text-center my-4 pt-2">Available Courses</h3>
+			<Row sm={1} md={2} className="mx-auto">
 					{courses}
 			</Row>
 		</Container>

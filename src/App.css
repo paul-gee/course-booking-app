@@ -11,7 +11,7 @@
 }
 
 :root {
-  --gray-bg: rgb(222, 226, 230);
+  --gray-bg: rgb(221, 221, 221);
   --green-font: rgb(0, 198, 178);
   --darkgreen-effect: rgb(35, 133, 122);
   --blackgreen-font: rgb(52, 69, 72);
@@ -22,15 +22,19 @@ body {
   background: rgba(242, 250, 255, 40%) !important;
 }
 
+
+.main-container {
+  min-height: calc(100vh - 230px);
+}
+
 .login-title,
 .register-title {
   font-size: 22px;
   color: var(--green-font);
 }
 
-.navbar,
-.table-row {
-    background: rgba(242, 250, 255, 40%) !important;
+.navbar {
+  background: rgba(242, 250, 255, 40%) !important;
 }
 
 .navbar {
@@ -66,11 +70,12 @@ body {
   border: 1px solid var(--green-font) !important;
   background: var(--green-font) !important;
   padding: 6px 20px !important;
+  color: #ffffff !important;
   font-weight: 500 !important;
 }
 
 .highlight-card {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 0 18px rgba(0, 0, 0, 15%);
     border: none !important;
     text-align: justify;
 }
@@ -78,8 +83,12 @@ body {
 .login-card,
 .signup-card,
 .course-card,
-.view-course-card {
-    box-shadow: 0 0 18px rgba(0, 0, 0, 0.15);
+.view-course-card,
+.user-profile-card,
+.user-enrollments-card,
+.addcourse-card,
+.editcourse-card {
+    box-shadow: 0 0 18px rgba(0, 0, 0, 15%);
     border: none !important;
 }
 
@@ -103,21 +112,62 @@ body {
   font-weight: 600 !important;
 }
 
-.course-details-button,
-.banner-button {
-  border: 1px solid var(--darkgreen-effect) !important;
-  background: var(--darkgreen-effect) !important;
+.course-card-price {
+  font-weight: 500 !important;
 }
 
-.course-details-button,
-.course-edit-button,
-.enroll-button,
-.banner-button {
-  padding: 7px 30px !important;
+.btn-primary {
+  border: 1px solid var(--darkgreen-effect) !important;
+  background: var(--darkgreen-effect) !important;
+  padding: 6px 30px !important;
 }
 
 .user-profile-label {
   width: 75px;
+}
+
+.admin-enrollees-table-container {
+  overflow: auto;
+}
+
+.user-enrollments-table,
+.admin-course-table,
+.admin-enrollees-table {
+  border-collapse: collapse;
+  box-shadow: 0 0 14px rgba(0, 0, 0, 15%);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.user-enrollments-table thead tr,
+.admin-course-table thead tr {
+  background-color: rgba(0, 198, 178, 40%);
+  color: var(--gen-white);
+  letter-spacing: 1px;
+  padding: 0px 0px !important;
+}
+
+.admin-enrollees-table-header {
+  background-color: rgba(35, 133, 122, 60%);
+  color: var(--gen-white);
+  letter-spacing: 1px;
+  padding: 0px 0px !important;
+}
+
+.admin-enrollees-course-row {
+  background-color: rgba(35, 133, 122, 15%);
+  letter-spacing: 1px;
+  padding: 0px 0px !important;
+}
+
+.user-enrollments-table tbody tr,
+.admin-course-table tbody tr {
+  border-bottom: 1px solid var(--gray-bg);
+}
+
+.user-enrollments-table tbody tr:last-child,
+.admin-course-table tbody tr:last-child {
+    border-bottom: 2px solid rgba(0, 198, 178, 40%);
 }
 
 @media (max-width: 992px) {
@@ -126,7 +176,13 @@ body {
   }
 }
 
-.enrollees-table {
-  border: 5px black !important;
+.paul {
+  text-decoration: none !important;
+  color: rgba(35, 133, 122, 60%);
+  font-size: 16px;
+  font-weight: 700;
+}
 
+.paul:hover {
+  color: rgb(0, 0, 0);
 }
