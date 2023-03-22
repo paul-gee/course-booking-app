@@ -143,7 +143,7 @@ export default function Register() {
               <Form.Label>Email address</Form.Label>
               <Form.Control
               type="email"
-              placeholder="Enter email"
+              placeholder="Enter a valid email"
               value={email}
               onChange={e => setEmail(e.target.value)}
               required
@@ -157,7 +157,7 @@ export default function Register() {
               <Form.Label>Mobile Number</Form.Label>
               <Form.Control
               type="text"
-              placeholder="Enter mobile number"
+              placeholder="Mobile number must be 11 digits"
               value={mobileNo}
               onChange={e => setMobileNo(e.target.value)}
               required

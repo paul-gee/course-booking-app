@@ -44,7 +44,7 @@ export default function Login() {
             confirmButtonColor: "#23857a"
           });
 
-          navigate("/courses")
+          navigate("/")
 
         } else {
 

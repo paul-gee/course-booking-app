@@ -96,7 +96,9 @@ export default function CourseView(){
 			<Col lg={{span:6, offset:3}}>
 				<Card className="view-course-card p-3">
 					<Card.Body className="d-flex flex-column">
-						<Card.Title className="course-card-title">{name}</Card.Title>
+						<Card.Title className="course-card-title">
+							{name}
+						</Card.Title>
 						<Card.Subtitle className="mt-3">Description:</Card.Subtitle>
 						<Card.Text>{description}</Card.Text>
 						<Card.Subtitle>Price:</Card.Subtitle>

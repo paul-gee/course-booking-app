@@ -35,7 +35,7 @@ export default function AppNavbar(){
 		            	:
 		            	<Nav.Link className="mx-2" as={Link} to="/users/details" eventKey="6">Account</Nav.Link>
 	            	}
-	            	<Nav.Link className="mx-2" as={Link} to="/logout">Sign out</Nav.Link>
+	            	<Nav.Link className="mx-2" as={Link} to="/logout">Log out</Nav.Link>
 	            	</>
 	            }
 	          </Nav>

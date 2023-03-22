@@ -17,6 +17,7 @@ import Error from './pages/Error';
 import Footer from './components/Footer'
 import { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
+import 'react-loading-skeleton/dist/skeleton.css'
 import './App.css';
 
 function App() {

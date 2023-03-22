@@ -1,5 +1,5 @@
 
-import { Form, Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Form, Button, Container, Col, Card } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';

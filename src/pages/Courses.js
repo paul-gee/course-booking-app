@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { Container, Row } from "react-bootstrap";
 import CourseCard from '../components/CourseCard';
+import { SkeletonCard } from '../components/SkeletonCard';
 // import { Navigate } from 'react-router-dom';
 // import UserContext from '../UserContext';
 // import { useContext } from 'react';
@@ -9,7 +10,8 @@ import CourseCard from '../components/CourseCard';
 export default function Courses() {
 
 	// const { user } = useContext(UserContext);
-	const [courses, setCourses] =useState([])	
+	const [isLoading, setIsLoading] = useState(true);
+	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
 	fetch(`${process.env.REACT_APP_API_URL}/courses`)
@@ -22,7 +24,8 @@ export default function Courses() {
 			<CourseCard courseProp={course} key={course._id}/>
 			)
 		}))
-		setCourses(courseArr)
+		setCourses(courseArr);
+		setIsLoading(false);
 	})
 
 	}, [courses])
@@ -30,8 +33,14 @@ export default function Courses() {
 	return (
 		<Container>
 			<h3 className="page-header text-center my-4 pt-2">Available Courses</h3>
+			{
+				isLoading &&
+				<Row sm={1} md={2} className="mx-auto">
+					<SkeletonCard cards={5} />
+				</Row>
+			}
 			<Row sm={1} md={2} className="mx-auto">
-					{courses}
+				{courses}
 			</Row>
 		</Container>
 	)

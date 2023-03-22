@@ -176,13 +176,13 @@ body {
   }
 }
 
-.paul {
+.paul-footer {
   text-decoration: none !important;
   color: rgba(35, 133, 122, 60%);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
 }
 
-.paul:hover {
+.paul-footer:hover {
   color: rgb(0, 0, 0);
 }
