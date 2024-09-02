@@ -53,18 +53,18 @@ function App() {
           <AppNavbar/>
           <Container className="main-container">
             <Routes>
-              <Route path="/" element={<Home/>}/>
-              <Route path="/users/details" element={<Account/>}/>
-              <Route path="/admin" element={<Dash/>}/>
-              <Route path="/addCourse" element={<AddCourse/>} />
-              <Route path="/editCourse/:courseId" element={<EditCourse/>} />
-              <Route path="/admin/enrollments" element={<Enrollments/>}/>
+              <Route path="/" element={<Home/>} />
+              <Route path="/users/details" element={<Account/>} />
+              <Route path="/admin" element={<Dash/>} />
+              <Route path="/add-course" element={<AddCourse/>} />
+              <Route path="/edit-course/:courseId" element={<EditCourse/>} />
+              <Route path="/admin/enrollments" element={<Enrollments/>} />
               <Route path="/courses" element={<Courses/>}/>
-              <Route path="/courses/:courseId" element={<CourseView/>}/>
-              <Route path="/login" element={<Login/>}/>
-              <Route path="/register" element={<Register/>}/>
-              <Route path="/logout" element={<Logout/>}/>
-              <Route path="*" element={<Error/>}/>
+              <Route path="/courses/:courseId" element={<CourseView/>} />
+              <Route path="/login" element={<Login/>} />
+              <Route path="/register" element={<Register/>} />
+              <Route path="/logout" element={<Logout/>} />
+              <Route path="*" element={<Error/>} />
             </Routes>
           </Container>
           <Footer/>
