@@ -2,7 +2,7 @@ import Banner from '../components/Banner';
 import Highlights from '../components/Highlights';
 
 
-export default function Home(){
+export default function Home() {
 
 	const data = {
 		title: "Online Coding Courses",

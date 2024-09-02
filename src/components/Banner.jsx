@@ -2,8 +2,8 @@ import { Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 
-export default function Banner({bannerProp}){
-	const {title, content, destination, label} = bannerProp;
+export default function Banner({ bannerProp }) {
+	const { title, content, destination, label } = bannerProp;
 
 	return (
 		<div className="text-center my-5 py-3">

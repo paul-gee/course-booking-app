@@ -37,70 +37,68 @@ export default function Courses() {
 	return (
 		user.isAdmin !== null ?
 		<>
-		<Row className="mt-5">
-		<Container className="d-flex">
-		 <Card className="user-profile-card mx-auto">
-		 	<Card.Header>
-		 		Profile
-		 	</Card.Header>
-		 	<Card.Body>
-		 		<InputGroup className="my-2 px-4">
-            	<InputGroup.Text className="user-profile-label">Name</InputGroup.Text>
-  				<Form.Control
-  					type="text"
-  					readOnly
-  					value={user.firstName + " " + user.lastName}
-  				/>
-  				</InputGroup>
-  				<InputGroup className="my-2 px-4">
-            	<InputGroup.Text className="user-profile-label">Email</InputGroup.Text>
-  				<Form.Control
-  					type="text"
-  					readOnly
-  					value={user.email}
-  				/>
-  				</InputGroup>
-				<InputGroup className="my-2 px-4">
-            	<InputGroup.Text className="user-profile-label">Mobile</InputGroup.Text>
-  				<Form.Control
-  					type="text"
-  					readOnly
-  					value={user.mobileNo}
-  				/>
-  				</InputGroup>
-		 	</Card.Body>
-		 </Card>
-		</Container>
-		</Row>
- 
-		<Row className="mt-5">
-		 <Card className="user-enrollments-card">
-		 	<Card.Header>
-		 		Enrollments
-		 	</Card.Header>
-		 	<Card.Body>
-		 		<Table className="user-enrollments-table text-center align-middle" striped hover>
-					<thead>
-						<tr>
-							<th>#</th>
-							<th className="hideOnSmall">Course ID</th>
-							<th>Course Name</th>
-							<th className="hideOnSmall">Price</th>
-							<th className="hideOnSmall">Enrolled On</th>
-							<th>Status</th>
-						</tr>
-						</thead>
-					<tbody>
-						{ enrollmentData }
-					</tbody>
-				</Table> 
-		 	</Card.Body>
-		 </Card>
-		</Row>
+			<Row className="mt-5">
+				<Container className="d-flex">
+				<Card className="user-profile-card mx-auto">
+					<Card.Header>
+						Profile
+					</Card.Header>
+					<Card.Body>
+						<InputGroup className="my-2 px-4">
+							<InputGroup.Text className="user-profile-label">Name</InputGroup.Text>
+							<Form.Control
+								type="text"
+								readOnly
+								value={user.firstName + " " + user.lastName}
+							/>
+						</InputGroup>
+						<InputGroup className="my-2 px-4">
+							<InputGroup.Text className="user-profile-label">Email</InputGroup.Text>
+							<Form.Control
+								type="text"
+								readOnly
+								value={user.email}
+							/>
+						</InputGroup>
+						<InputGroup className="my-2 px-4">
+							<InputGroup.Text className="user-profile-label">Mobile</InputGroup.Text>
+							<Form.Control
+								type="text"
+								readOnly
+								value={user.mobileNo}
+							/>
+						</InputGroup>
+					</Card.Body>
+				</Card>
+				</Container>
+			</Row>
+	
+			<Row className="mt-5">
+				<Card className="user-enrollments-card">
+					<Card.Header>
+						Enrollments
+					</Card.Header>
+					<Card.Body>
+						<Table className="user-enrollments-table text-center align-middle" striped hover>
+							<thead>
+								<tr>
+									<th>#</th>
+									<th className="hideOnSmall">Course ID</th>
+									<th>Course Name</th>
+									<th className="hideOnSmall">Price</th>
+									<th className="hideOnSmall">Enrolled On</th>
+									<th>Status</th>
+								</tr>
+								</thead>
+							<tbody>
+								{ enrollmentData }
+							</tbody>
+						</Table> 
+					</Card.Body>
+				</Card>
+			</Row>
 		</>
 		:
-		<>
-		 <Navigate to="/courses"/>
-		</>
+		<Navigate to="/courses"/>
 	)
 }
