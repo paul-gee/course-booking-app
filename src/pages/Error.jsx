@@ -1,4 +1,4 @@
-import Banner from '../components/Banner.js'
+import Banner from '../components/Banner'
 
 export default function Error() {
 
