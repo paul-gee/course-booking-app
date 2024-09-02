@@ -4,8 +4,7 @@ import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import UserContext from '../UserContext';
 
-export default function AppNavbar(){
-
+export default function AppNavbar() {
 	const { user } = useContext(UserContext);
 
 	return(

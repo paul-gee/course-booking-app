@@ -7,21 +7,24 @@ import UserContext from '../UserContext';
 
 
 export default function AddCourse() {
-
-	const {user} = useContext(UserContext);
-
 	const navigate = useNavigate();
-
+	const {user} = useContext(UserContext);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
 	const [isActive, setIsActive] = useState(false);
     // const [slots, setSlots] = useState(0);
-
+	
+	useEffect(() => {
+		if (name !== "" && description !== "" && price > 0) {
+			setIsActive(true);
+		} else {
+			setIsActive(false);
+		}
+	}, [name, description, price]);
 
 	function addCourse(e) {
-
-	    e.preventDefault();
+		e.preventDefault();
 
 	    fetch(`${process.env.REACT_APP_API_URL}/courses`, {
 	    	method: "POST",
@@ -38,19 +41,15 @@ export default function AddCourse() {
 	    })
 	    .then(res => res.json())
 	    .then(data => {
-	    	console.log(data);
-
-	    	if(data){
+	    	if (data) {
 	    		Swal.fire({
 	    		    title: "Course succesfully Added",
 	    		    icon: "success",
 	    		    text: `${name} is now added`,
 	    		    confirmButtonColor: "#23857a"
 	    		});
-
 	    		navigate("/admin");
-	    	}
-	    	else{
+	    	} else {
 	    		Swal.fire({
 	    		    title: "Error!",
 	    		    icon: "error",
@@ -58,28 +57,14 @@ export default function AddCourse() {
 	    		    confirmButtonColor: "#23857a"
 	    		});
 	    	}
-
 	    })
-
 	    setName('');
 	    setDescription('');
 	    setPrice(0);
 	    // setSlots(0);
-
 	}
 
-	useEffect(() => {
-
-        if(name !== "" && description !== "" && price > 0){
-            setIsActive(true);
-        } else {
-            setIsActive(false);
-        }
-
-    }, [name, description, price]);
-
     return (
-
     	<Container className="mt-5">
 			<Col lg={{span:6, offset:3}}>
 				<Card className="addcourse-card p-4">
@@ -118,15 +103,9 @@ export default function AddCourse() {
 						required
 					/>
 					</Form.Group>
-					{ isActive ? 
-					<Button variant="primary" type="submit" id="submitBtn">
+					<Button variant="primary" type="submit" id="submitBtn" disabled={!isActive}>
 						Add Course
 					</Button>
-					: 
-					<Button variant="primary" type="submit" id="submitBtn" disabled>
-						Add Course
-					</Button>
-					}
 					<Button className="m-2" as={Link} to="/admin" variant="secondary" type="submit" id="submitBtn">
 						Cancel
 					</Button>
@@ -139,5 +118,4 @@ export default function AddCourse() {
 			</Col>
 		</Container>
     )
-
 }

@@ -2,17 +2,10 @@
 import { Card, Form, Button, Col, Container } from 'react-bootstrap'
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-// import { Navigate } from 'react-router-dom';
-// import { useContext } from 'react';
-// import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
 
 export default function Register() {
-
-  // const { user } = useContext(UserContext);
-
   const navigate = useNavigate();
-
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -20,40 +13,36 @@ export default function Register() {
   const [password1, setPassword1] = useState('');
   const [password2, setPassword2] = useState('');
   const [isActive, setIsActive] = useState(false);
+  
+  useEffect(() => {
+    if ((firstName !== "" && lastName !== "" && mobileNo.length === 11 && email !== "" && password1 !== "" && password2 !== "") && (password1 === password2)) {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
+  }, [firstName, lastName, email, mobileNo, password1, password2])
 
-  function registerUser(e){
-
+  function registerUser(e) {
     e.preventDefault();
 
     fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`,{
       method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        email: email
-      })
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: email })
     })
     .then(res => res.json())
     .then(data => {
-      console.log(data)
-
       if (data === true) {
-
           Swal.fire({
           title: "Duplicate Email Found!",
           icon: "error",
           text: "Kindly provide another email to complete the registration!",
           confirmButtonColor: "#23857a"
         })
-
       } else {
-
         fetch(`${process.env.REACT_APP_API_URL}/users/register`,{
           method: "POST",
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             firstName: firstName,
             lastName: lastName,
@@ -66,50 +55,31 @@ export default function Register() {
         .then(data => {
 
           if (data === true) {
-
             setFirstName("");
             setLastName("");
             setEmail("");
             setMobileNo("");
             setPassword1("");
             setPassword2("");
-
             Swal.fire({
               title: "Registration successful!",
               icon: "success",
               text: "Welcome to Course Booking!",
               confirmButtonColor: "#23857a"
             })
-
             navigate("/login")
-
           } else {
-
             Swal.fire({
               title: "Something went wrong!",
               icon: "error",
               text: "Please try again!",
               confirmButtonColor: "#23857a"
-
-          })
-        }
-      })
-    }
-  })
-
+            })
+          }
+        })
+      }
+    })
   }
-
-
-  useEffect(() => {
-
-    if ((firstName !== "" && lastName !== "" && mobileNo.length === 11 && email !== "" && password1 !== "" && password2 !== "")&&(password1 === password2)){
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
-
-  },[firstName, lastName, email, mobileNo, password1, password2])
-
 
   return (
     <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
@@ -186,15 +156,9 @@ export default function Register() {
             </Form.Group>
 
             <Container className="text-center">
-              { isActive ?      
-                  <Button variant="primary" type="submit" id="submitBtn">
-                      Create Account
-                  </Button>
-                :
-                  <Button variant="primary" type="submit" id="submitBtn" disabled>
-                      Create Account
-                  </Button>
-              }
+              <Button variant="primary" type="submit" id="submitBtn" disabled={!isActive}>
+                  Create Account
+              </Button>
             </Container>
 
           </Form>

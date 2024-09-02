@@ -3,42 +3,34 @@ import { useEffect, useState, useContext } from 'react';
 import { Container, Row, Card, Table, InputGroup, Form } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
 import UserContext from '../UserContext';
-import { formatPrice, formatDate } from '../utils.js';
+import { formatPrice, formatDate } from '../scripts/utils.js';
 
 export default function Courses() {
-
 	const { user } = useContext(UserContext);
 	const [enrollmentData, setEnrollmentData] =useState([])
 
 	useEffect(() => {
-
 		fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
-        	headers:{
-        		Authorization: `Bearer ${localStorage.getItem('token')}`
-      		}
+        	headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         })
         .then(res => res.json())
         .then(data => {
-
 			const enrollmentArr = (data.enrollments.reverse().map((enrollments, index) => {
 
 				return (
-						<tr key={enrollments._id}>
-							<td>{index + 1}</td>
-							<td className="hideOnSmall">{enrollments.courseId}</td>
-							<td>{enrollments.name}</td>
-							<td className="hideOnSmall">{formatPrice(enrollments.price)}</td>
-							<td className="hideOnSmall">{formatDate(enrollments.enrolledOn)}</td>
-							<td>{enrollments.status}</td>
-						</tr>
+					<tr key={enrollments._id}>
+						<td>{index + 1}</td>
+						<td className="hideOnSmall">{enrollments.courseId}</td>
+						<td>{enrollments.name}</td>
+						<td className="hideOnSmall">{formatPrice(enrollments.price)}</td>
+						<td className="hideOnSmall">{formatDate(enrollments.enrolledOn)}</td>
+						<td>{enrollments.status}</td>
+					</tr>
 				)
-				
 			}))
 			setEnrollmentData(enrollmentArr);
 		})
-		
-	})
-
+	}, [])
 
 	return (
 		user.isAdmin !== null ?

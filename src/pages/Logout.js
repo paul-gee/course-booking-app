@@ -3,17 +3,12 @@ import { useContext, useEffect } from 'react';
 import UserContext from '../UserContext';
 
 export default function Logout() {
+	const { unsetUser, setUser } = useContext(UserContext);
 
-		const { unsetUser, setUser } = useContext(UserContext);
-
+	useEffect(() => {
 		unsetUser();
+		setUser({ id: null });
+	}, [])
 
-		useEffect(() => {
-			setUser({id: null});
-		})
-
-		return (
-			<Navigate to="/login"/>
-		)
-
+	return <Navigate to="/login"/>
 }

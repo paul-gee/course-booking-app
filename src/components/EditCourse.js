@@ -6,19 +6,33 @@ import Swal from 'sweetalert2';
 
 
 export default function EditCourse() {
-
-	const { user } = useContext(UserContext);
-	const { courseId } = useParams();
-
 	const navigate = useNavigate();
-
+	const { courseId } = useParams();
+	const { user } = useContext(UserContext);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
     const [isActive, setIsActive] = useState(false);
+	
+	useEffect(() => {
+		if(name !== "" && description !== "" && price > 0 ){
+			setIsActive(true);
+		} else {
+			setIsActive(false);
+		}
+	}, [name, description, price]);
+
+	useEffect(()=> {
+		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`)
+		.then(res => res.json())
+		.then(data => {
+			setDescription(data.description);
+			setPrice(data.price);
+			// setSlots(data.slots);
+		});
+	}, [courseId]);
 
 	function editCourse(e) {
-
 	    e.preventDefault();
 
 	    fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`, {
@@ -35,8 +49,6 @@ export default function EditCourse() {
 	    })
 	    .then(res => res.json())
 	    .then(data => {
-	    	console.log(data);
-
 	    	if (data) {
 	    		Swal.fire({
 	    		    title: "Course succesfully Updated",
@@ -44,7 +56,6 @@ export default function EditCourse() {
 	    		    text: `${name} is now updated`,
 	    		    confirmButtonColor: "#23857a"
 	    		});
-
 	    		navigate("/admin");
 	    	} else {
 	    		Swal.fire({
@@ -54,46 +65,13 @@ export default function EditCourse() {
 	    		    confirmButtonColor: "#23857a"
 	    		});
 	    	}
-
 	    })
-
 	    setName('');
 	    setDescription('');
 	    setPrice(0);
-
 	}
 
-	useEffect(() => {
-
-        if(name !== "" && description !== "" && price > 0 ){
-            setIsActive(true);
-        } else {
-            setIsActive(false);
-        }
-
-    }, [name, description, price]);
-
-    useEffect(()=> {
-
-    	console.log(courseId);
-
-    	fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`)
-    	.then(res => res.json())
-    	.then(data => {
-
-    		console.log(data);
-
-    		setName(data.name);
-    		setDescription(data.description);
-    		setPrice(data.price);
-    		// setSlots(data.slots);
-
-    	});
-
-    }, [courseId]);
-
     return (
-
     	<Container className="mt-5">
 		     <Col lg={{span:6, offset:3}}>
 				<Card className="editcourse-card p-4">
@@ -146,19 +124,12 @@ export default function EditCourse() {
 			                />
 			            </Form.Group>*/}
 
-		        	    { isActive 
-		        	    	? 
-		        	    	<Button variant="primary" type="submit" id="submitBtn">
-		        	    		Update
-		        	    	</Button>
-		        	        : 
-		        	        <Button variant="primary" type="submit" id="submitBtn" disabled>
-		        	        	Update
-		        	        </Button>
-		        	    }
-		        	    	<Button className="m-2" as={Link} to="/admin" variant="secondary" type="submit" id="submitBtn">
-		        	    		Cancel
-		        	    	</Button>
+						<Button variant="primary" type="submit" id="submitBtn" disabled={!isActive}>
+							Update
+						</Button>
+						<Button className="m-2" as={Link} to="/admin" variant="secondary" type="submit" id="submitBtn">
+							Cancel
+						</Button>
 			        </Form>
 		    		</>
     				:

@@ -10,9 +10,9 @@ export default function Home(){
 		label: "Enroll now!"
 	}
 
-	return(
+	return (
 		<>
-			<Banner bannerProp={data}/>
+			<Banner bannerProp={data} />
 			<Highlights/>
 		</>
 	)

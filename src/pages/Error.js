@@ -1,6 +1,6 @@
 import Banner from '../components/Banner.js'
 
-export default function Error(){
+export default function Error() {
 
 	const data = {
 		title: "404 - Not found",
@@ -9,7 +9,5 @@ export default function Error(){
 		label: "Back Home"
 	}
 
-	return(
-		<Banner bannerProp = {data}/>
-		)
+	return <Banner bannerProp = {data}/>
 }

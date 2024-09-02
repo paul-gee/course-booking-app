@@ -2,26 +2,24 @@ import { useContext, useState, useEffect } from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
 import { Navigate, Link } from "react-router-dom";
 import UserContext from "../UserContext";
-import { formatPrice } from '../utils.js';
+import { formatPrice } from '../scripts/utils.js';
 
 import Swal from "sweetalert2";
 
 export default function Dash(){
-
-	const {user} = useContext(UserContext);
-
+	const { user } = useContext(UserContext);
 	const [allCourses, setAllCourses] = useState([]);
+	
+	useEffect(() => {
+		fetchData();
+	}, [])
 
 	const fetchData = () => {
-
 		fetch(`${process.env.REACT_APP_API_URL}/courses/all`,{
-			headers:{
-				"Authorization": `Bearer ${localStorage.getItem("token")}`
-			}
+			headers: { "Authorization": `Bearer ${localStorage.getItem("token")}`}
 		})
 		.then(res => res.json())
 		.then(data => {
-
 			setAllCourses(data.map((course, index) => {
 				return(
 					<tr key={course._id}>
@@ -42,19 +40,14 @@ export default function Dash(){
 								<Button as={ Link } to={`/courses/${course._id}`} variant="primary" size="sm" className="mt-1">View</Button>
 								<Button as={ Link } to={`/editCourse/${course._id}`} variant="secondary" size="sm" className="mt-1">Edit</Button>
 							</ButtonGroup>
-
-	
 						</td>
 					</tr>
 				)
 			}))
-
 		})
 	}
 
-	const archive = (courseId, courseName) =>{
-		console.log(courseId);
-		console.log(courseName);
+	const archive = (courseId, courseName) => {
 
 		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}/archive`,{
 			method: "PUT",
@@ -67,9 +60,7 @@ export default function Dash(){
 			})
 		})
 		.then(res => res.json())
-		.then(data =>{
-			console.log(data);
-
+		.then(data => {
 			if (data) {
 				Swal.fire({
 					title: "Archive Succesful!",
@@ -89,10 +80,7 @@ export default function Dash(){
 		})
 	}
 
-	const unarchive = (courseId, courseName) =>{
-		console.log(courseId);
-		console.log(courseName);
-
+	const unarchive = (courseId, courseName) => {
 		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}/active`,{
 			method: "PUT",
 			headers: {
@@ -105,8 +93,6 @@ export default function Dash(){
 		})
 		.then(res => res.json())
 		.then(data => {
-			console.log(data);
-
 			if (data) {
 				Swal.fire({
 					title: "Unarchive Succesful!",
@@ -126,12 +112,7 @@ export default function Dash(){
 		})
 	}
 
-	useEffect(() => {
-		fetchData();
-	})
-
 	return (
-
 		(user.isAdmin)
 		?
 		<>
@@ -159,6 +140,5 @@ export default function Dash(){
 		</>
 		:
 		<Navigate to="/courses" />
-		
 	)
 }

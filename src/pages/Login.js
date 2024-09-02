@@ -1,28 +1,31 @@
-import {Card, Form, Button, Col, Container } from 'react-bootstrap';
+import { Card, Form, Button, Col, Container } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import UserContext from '../UserContext';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 
 export default function Login() {
-
+  const navigate = useNavigate();
   const [email, setEmail] = useState ('');
   const [password, setPassword] = useState ('');
-  const [isActive, setIsActive] = useState ('');
-
-  const { user, setUser } = useContext(UserContext);
-  const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
+  const [isActive, setIsActive] = useState (false);
+  
+  useEffect(() => {
+    if (email !== "" && password !== "") {
+      setIsActive(true)
+    } else {
+      setIsActive(false)
+    }
+  }, [email, password])
 
   function authenticate(e) {
-
-      e.preventDefault()
-
-      fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type':'application/json'
-        },
+    e.preventDefault()
+    
+    fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
+      method: 'POST',
+        headers: { 'Content-Type':'application/json' },
         body: JSON.stringify({
           email: email,
           password: password
@@ -30,8 +33,6 @@ export default function Login() {
       })
       .then(res => res.json())
       .then(data => {
-
-        //console.log(data);
 
         if (typeof data.access !== "undefined") {
           localStorage.setItem('token',data.access)
@@ -43,33 +44,23 @@ export default function Login() {
             text: "Welcome to Course Booking!",
             confirmButtonColor: "#23857a"
           });
-
           navigate("/")
-
         } else {
-
           Swal.fire({
             title: "Authentication Failed!",
             icon: "error",
             text: "Check your credentials!",
             confirmButtonColor: "#23857a" 
           });
-          
         }
       })
 
       const retrieveUserDetails = (token) => {
-
-        //REACT_APP_API_URL=http://localhost:4000
-
         fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
-          headers: {
-            Authorization: `Bearer ${token}`
-          }
+          headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())
         .then(data => {
-          
           setUser({
             id: data._id,
             isAdmin: data.isAdmin,
@@ -85,19 +76,7 @@ export default function Login() {
       setPassword("");
   }
 
-  useEffect(() => {
-
-    if (email !== "" && password !== "") {
-      setIsActive(true)
-    } else {
-      setIsActive(false)
-    }
- 
-  }, [email, password])
-
-
   return (
-    
     <Col xs={10} sm={8} md={6} lg={4} className="mx-auto my-5">
       <h4 className="login-title text-center py-2">Sign in to Course Booking</h4>
       <Card className="login-card px-2">
@@ -126,20 +105,13 @@ export default function Login() {
             </Form.Group>
 
             <Container className="text-center">
-            { isActive ?
-            <Button variant="primary" type="submit" id="submitBtn">
-              Log in
-            </Button>
-            :
-            <Button variant="primary" type="submit" id="submitBtn" disabled>
-              Log in
-            </Button>
-            }
+              <Button variant="primary" type="submit" id="submitBtn" disabled={!isActive}>
+                Log in
+              </Button>
             </Container>
           </Form>
         </Card.Body>
       </Card>
     </Col>
-    
   );
 }

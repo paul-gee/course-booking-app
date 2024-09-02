@@ -6,13 +6,10 @@ import UserContext from '../UserContext';
 
 
 export default function Enrollments() {
-
 	const { user } = useContext(UserContext);
-
 	const [courseData, setCourseData] =useState([])
 
 	useEffect(() => {
-
 		fetch(`${process.env.REACT_APP_API_URL}/courses/`, {
         	headers:{
         		Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -20,11 +17,9 @@ export default function Enrollments() {
         })
         .then(res => res.json())
         .then(data => setCourseData(data));
-
 	}, []);
 		
 	function createEnrolleesTable () {
-
 		if (courseData.length === 0) {
 			return (
 				<Card className="mt-5 text-center">
@@ -121,9 +116,6 @@ export default function Enrollments() {
   	if (user.isAdmin) {
 		return createEnrolleesTable();
 	} else {
-		return (
-			<Navigate to="/courses"/>
-		)
+		return <Navigate to="/courses"/>
 	}
-	
 }

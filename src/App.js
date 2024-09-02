@@ -21,22 +21,11 @@ import 'react-loading-skeleton/dist/skeleton.css'
 import './App.css';
 
 function App() {
-
-  const [user, setUser] = useState({
-    id: null,
-    isAdmin: null
-  })
-
-
-  const unsetUser = () => {
-    localStorage.clear();
-  }
+  const [user, setUser] = useState({ id: null, isAdmin: null })
 
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
-      headers:{
-        Authorization: `Bearer ${localStorage.getItem('token')}`
-      }
+      headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
     .then(data => {
@@ -52,16 +41,15 @@ function App() {
             enrollments: data.enrollments
           });
       } else {
-        setUser ({
-          id: null,
-          isAdmin: null
-        })
+        setUser ({ id: null, isAdmin: null })
       }
     })
-  },[]);
+  }, []);
+
+  const unsetUser = () => localStorage.clear();
 
   return (
-    <UserProvider value = {{user, setUser, unsetUser}}>
+    <UserProvider value={{ user, setUser, unsetUser }}>
         <Router>
           <AppNavbar/>
           <Container className="main-container">
