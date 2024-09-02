@@ -1,8 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Col } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
+import UserContext from '../UserContext.js';
+import { API_BASE_URL } from '../constants/app.js';
 import { formatPrice } from '../scripts/utils.js'
 
 
@@ -15,7 +16,7 @@ export default function CourseView() {
 	const [description, setDescription] = useState("");
 	
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+		fetch(`${API_BASE_URL}/users/details`, {
 		  headers: { Authorization:`Bearer ${localStorage.getItem('token')}` }
 		})
 		.then(res => res.json())
@@ -33,7 +34,7 @@ export default function CourseView() {
 	 }, [])
 	
 	 useEffect(() => {
-		 fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`)
+		 fetch(`${API_BASE_URL}/courses/${courseId}`)
 		 .then(res => res.json())
 		 .then(data => {
 			 setName(data.name);
@@ -44,7 +45,7 @@ export default function CourseView() {
 	 }, [courseId, name, price])
 
 	const enroll = (courseId, name, price, firstName, lastName) => {
-		fetch(`${process.env.REACT_APP_API_URL}/users/enroll`, {
+		fetch(`${API_BASE_URL}/users/enroll`, {
 			method:'POST',
 			headers:{
 				'Content-Type':'application/json',

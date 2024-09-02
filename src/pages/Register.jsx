@@ -1,8 +1,10 @@
 
-import { Card, Form, Button, Col, Container } from 'react-bootstrap'
 import { useState, useEffect } from 'react';
+import { Card, Form, Button, Col, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { API_BASE_URL } from '../constants/app.js';
+
 
 export default function Register() {
   const navigate = useNavigate();
@@ -25,7 +27,7 @@ export default function Register() {
   function registerUser(e) {
     e.preventDefault();
 
-    fetch(`${process.env.REACT_APP_API_URL}/users/checkEmail`,{
+    fetch(`${API_BASE_URL}/users/checkEmail`,{
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email: email })
@@ -40,7 +42,7 @@ export default function Register() {
           confirmButtonColor: "#23857a"
         })
       } else {
-        fetch(`${process.env.REACT_APP_API_URL}/users/register`,{
+        fetch(`${API_BASE_URL}/users/register`,{
           method: "POST",
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

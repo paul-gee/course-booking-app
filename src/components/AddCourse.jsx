@@ -4,7 +4,7 @@ import { useState, useEffect, useContext } from 'react';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
-
+import { API_BASE_URL } from '../constants/app';
 
 export default function AddCourse() {
 	const navigate = useNavigate();
@@ -26,7 +26,7 @@ export default function AddCourse() {
 	function addCourse(e) {
 		e.preventDefault();
 
-	    fetch(`${process.env.REACT_APP_API_URL}/courses`, {
+	    fetch(`${API_BASE_URL}/courses`, {
 	    	method: "POST",
 	    	headers: {
 				"Content-Type": "application/json",

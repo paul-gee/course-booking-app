@@ -2,15 +2,17 @@
 import { useEffect, useState, useContext } from 'react';
 import { Container, Row, Card, Table, InputGroup, Form } from "react-bootstrap";
 import { Navigate } from 'react-router-dom';
-import UserContext from '../UserContext';
+import UserContext from '../UserContext.js';
+import { API_BASE_URL } from '../constants/app.js';
 import { formatPrice, formatDate } from '../scripts/utils.js';
+
 
 export default function Courses() {
 	const { user } = useContext(UserContext);
 	const [enrollmentData, setEnrollmentData] =useState([])
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+		fetch(`${API_BASE_URL}/users/details`, {
         	headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
         })
         .then(res => res.json())

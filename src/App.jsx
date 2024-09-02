@@ -1,30 +1,31 @@
-
+import { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import AppNavbar from './components/AppNavbar';
-import Home from './pages/Home';
-import Courses from './pages/Courses';
 import CourseView from './components/CourseView';
 import Dash from './components/Dash';
 import AddCourse from './components/AddCourse';
 import EditCourse from './components/EditCourse';
 import Enrollments from './components/Enrollments';
+import Footer from './components/Footer'
+import Home from './pages/Home';
+import Courses from './pages/Courses';
 import Register from './pages/Register';
 import Account from './pages/Account';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Error from './pages/Error';
-import Footer from './components/Footer'
-import { useState, useEffect } from 'react';
 import { UserProvider } from './UserContext';
+import { API_BASE_URL, NULL_USER } from './constants/app.js';
 import 'react-loading-skeleton/dist/skeleton.css'
 import './App.css';
 
+
 function App() {
-  const [user, setUser] = useState({ id: null, isAdmin: null })
+  const [user, setUser] = useState(NULL_USER)
 
   useEffect(() => {
-    fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+    fetch(`${API_BASE_URL}/users/details`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` }
     })
     .then(res => res.json())
@@ -41,15 +42,13 @@ function App() {
             enrollments: data.enrollments
           });
       } else {
-        setUser ({ id: null, isAdmin: null })
+        setUser(NULL_USER)
       }
     })
   }, []);
 
-  const unsetUser = () => localStorage.clear();
-
   return (
-    <UserProvider value={{ user, setUser, unsetUser }}>
+    <UserProvider value={{ user, setUser }}>
         <Router>
           <AppNavbar/>
           <Container className="main-container">

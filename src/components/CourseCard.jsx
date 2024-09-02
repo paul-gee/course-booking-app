@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Card, Button, Container } from 'react-bootstrap';
 import { formatPrice } from '../scripts/utils.js'
 
+
 export default function CourseCard({courseProp}) {
 	let { name, price, _id } = courseProp;
 

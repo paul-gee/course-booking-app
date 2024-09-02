@@ -1,8 +1,9 @@
-import { Card, Form, Button, Col, Container } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
-import UserContext from '../UserContext';
+import { Card, Form, Button, Col, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import UserContext from '../UserContext';
+import { API_BASE_URL } from '../constants/app.js';
 
 
 export default function Login() {
@@ -23,7 +24,7 @@ export default function Login() {
   function authenticate(e) {
     e.preventDefault()
     
-    fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
+    fetch(`${API_BASE_URL}/users/login`, {
       method: 'POST',
         headers: { 'Content-Type':'application/json' },
         body: JSON.stringify({
@@ -35,7 +36,7 @@ export default function Login() {
       .then(data => {
 
         if (typeof data.access !== "undefined") {
-          localStorage.setItem('token',data.access)
+          localStorage.setItem('token', data.access)
           retrieveUserDetails(data.access)
 
           Swal.fire({
@@ -56,7 +57,7 @@ export default function Login() {
       })
 
       const retrieveUserDetails = (token) => {
-        fetch(`${process.env.REACT_APP_API_URL}/users/details`, {
+        fetch(`${API_BASE_URL}/users/details`, {
           headers: { Authorization: `Bearer ${token}` }
         })
         .then(res => res.json())

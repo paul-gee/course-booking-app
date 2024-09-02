@@ -1,8 +1,9 @@
+import { useState, useEffect, useContext } from 'react';
 import { Form, Button, Container, Card, Col } from 'react-bootstrap';
 import { Navigate, Link, useParams, useNavigate } from 'react-router-dom';
-import { useState, useEffect, useContext } from 'react';
-import UserContext from '../UserContext';
 import Swal from 'sweetalert2';
+import { API_BASE_URL } from '../constants/app';
+import UserContext from '../UserContext';
 
 
 export default function EditCourse() {
@@ -23,7 +24,7 @@ export default function EditCourse() {
 	}, [name, description, price]);
 
 	useEffect(()=> {
-		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`)
+		fetch(`${API_BASE_URL}/courses/${courseId}`)
 		.then(res => res.json())
 		.then(data => {
 			setDescription(data.description);
@@ -35,7 +36,7 @@ export default function EditCourse() {
 	function editCourse(e) {
 	    e.preventDefault();
 
-	    fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}`, {
+	    fetch(`${API_BASE_URL}/courses/${courseId}`, {
 	    	method: "PUT",
 	    	headers: {
 				"Content-Type": "application/json",

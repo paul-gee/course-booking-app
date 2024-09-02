@@ -12,3 +12,7 @@ const dateFormat = {
 export const formatDate = (isoDate) => {
 	return new Date(isoDate).toLocaleString('en-PH', dateFormat);
 }
+
+export const clearLocalStorage = () => {
+  localStorage?.clear();
+}

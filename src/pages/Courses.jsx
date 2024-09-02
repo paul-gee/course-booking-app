@@ -2,14 +2,16 @@
 import { useEffect, useState } from 'react';
 import { Container, Row } from "react-bootstrap";
 import CourseCard from '../components/CourseCard';
+import { API_BASE_URL } from '../constants/app.js';
 import { SkeletonCard } from '../components/SkeletonCard';
+
 
 export default function Courses() {
 	const [isLoading, setIsLoading] = useState(true);
 	const [courses, setCourses] = useState([]);
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_URL}/courses`)
+		fetch(`${API_BASE_URL}/courses`)
 		.then(res => res.json())
 		.then(data => {
 			const courseArr = (data.map(course => {

@@ -1,12 +1,13 @@
 import { useContext, useState, useEffect } from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
 import { Navigate, Link } from "react-router-dom";
-import UserContext from "../UserContext";
+import Swal from "sweetalert2";
+import UserContext from "../UserContext.js";
+import { API_BASE_URL } from '../constants/app.js';
 import { formatPrice } from '../scripts/utils.js';
 
-import Swal from "sweetalert2";
 
-export default function Dash(){
+export default function Dash() {
 	const { user } = useContext(UserContext);
 	const [allCourses, setAllCourses] = useState([]);
 	
@@ -15,7 +16,7 @@ export default function Dash(){
 	}, [])
 
 	const fetchData = () => {
-		fetch(`${process.env.REACT_APP_API_URL}/courses/all`,{
+		fetch(`${API_BASE_URL}/courses/all`,{
 			headers: { "Authorization": `Bearer ${localStorage.getItem("token")}`}
 		})
 		.then(res => res.json())
@@ -49,7 +50,7 @@ export default function Dash(){
 
 	const archive = (courseId, courseName) => {
 
-		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}/archive`,{
+		fetch(`${API_BASE_URL}/courses/${courseId}/archive`,{
 			method: "PUT",
 			headers:{
 				"Content-Type": "application/json",
@@ -81,7 +82,7 @@ export default function Dash(){
 	}
 
 	const unarchive = (courseId, courseName) => {
-		fetch(`${process.env.REACT_APP_API_URL}/courses/${courseId}/active`,{
+		fetch(`${API_BASE_URL}/courses/${courseId}/active`,{
 			method: "PUT",
 			headers: {
 				"Content-Type": "application/json",

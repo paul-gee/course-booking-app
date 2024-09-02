@@ -1,16 +1,17 @@
 
-import React, { useState, useEffect, useContext } from 'react';
+import { Fragment, useState, useEffect, useContext } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { Navigate } from 'react-router-dom';
 import UserContext from '../UserContext';
+import { API_BASE_URL } from '../constants/app';
 
 
 export default function Enrollments() {
 	const { user } = useContext(UserContext);
-	const [courseData, setCourseData] =useState([])
+	const [courseData, setCourseData] = useState([]);
 
 	useEffect(() => {
-		fetch(`${process.env.REACT_APP_API_URL}/courses/`, {
+		fetch(`${API_BASE_URL}/courses/`, {
         	headers:{
         		Authorization: `Bearer ${localStorage.getItem('token')}`
       		}
@@ -49,7 +50,7 @@ export default function Enrollments() {
 						{courseData.map((course, index) => {
 							const courseEntries = Object.entries(course).slice(0, 2).reverse();
 							return (
-								<React.Fragment key={index}>
+								<Fragment key={index}>
 									<tr
 										className="table-row admin-enrollees-course-row"
 										onClick={() => toggleCollapsibleRow(index)}
@@ -81,9 +82,9 @@ export default function Enrollments() {
 															<tr key={i}>
 															<th>{i + 1}</th>
 																{enrolleeEntries.map((value, j) => (
-																	<React.Fragment key={j}>
+																	<Fragment key={j}>
 																		<td>{value}</td>
-																	</React.Fragment>
+																	</Fragment>
 																))}
 															</tr>
 														);
@@ -93,7 +94,7 @@ export default function Enrollments() {
 											}
 										</td>
 									</tr>
-								</React.Fragment>
+								</Fragment>
 							);
 						})}
 						</tbody>
