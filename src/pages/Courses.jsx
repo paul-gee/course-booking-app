@@ -28,7 +28,7 @@ export default function Courses() {
 			{
 				isLoading &&
 				<Row sm={1} md={2} className="mx-auto">
-					<SkeletonCard cards={5} />
+					<SkeletonCard cards={4} />
 				</Row>
 			}
 			<Row sm={1} md={2} className="mx-auto">
