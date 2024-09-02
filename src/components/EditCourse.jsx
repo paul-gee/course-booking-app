@@ -1,22 +1,23 @@
 import { useState, useEffect, useContext } from 'react';
 import { Form, Button, Container, Card, Col } from 'react-bootstrap';
 import { Navigate, Link, useParams, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { API_BASE_URL } from '../constants/app';
 import UserContext from '../UserContext';
+import useSweetAlert from '../hooks/useSweetAlert';
 
 
 export default function EditCourse() {
 	const navigate = useNavigate();
 	const { courseId } = useParams();
+	const { openAlert } = useSweetAlert();
 	const { user } = useContext(UserContext);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
 	const [price, setPrice] = useState(0);
-    const [isActive, setIsActive] = useState(false);
+  const [isActive, setIsActive] = useState(false);
 	
 	useEffect(() => {
-		if(name !== "" && description !== "" && price > 0 ){
+		if (name !== "" && description !== "" && price > 0 ) {
 			setIsActive(true);
 		} else {
 			setIsActive(false);
@@ -51,19 +52,15 @@ export default function EditCourse() {
 	    .then(res => res.json())
 	    .then(data => {
 	    	if (data) {
-	    		Swal.fire({
+	    		openAlert({
 	    		    title: "Course succesfully Updated",
-	    		    icon: "success",
 	    		    text: `${name} is now updated`,
-	    		    confirmButtonColor: "#23857a"
 	    		});
 	    		navigate("/admin");
 	    	} else {
-	    		Swal.fire({
+	    		openAlert('error', {
 	    		    title: "Error!",
-	    		    icon: "error",
 	    		    text: `Something went wrong. Please try again later!`,
-	    		    confirmButtonColor: "#23857a"
 	    		});
 	    	}
 	    })

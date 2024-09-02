@@ -1,15 +1,16 @@
 import { useState, useEffect, useContext } from 'react';
 import { Container, Card, Button, Col } from 'react-bootstrap';
 import { useParams, useNavigate, Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import UserContext from '../UserContext.js';
 import { API_BASE_URL } from '../constants/app.js';
 import { formatPrice } from '../scripts/utils.js'
+import useSweetAlert from '../hooks/useSweetAlert.js';
 
 
 export default function CourseView() {
 	const navigate = useNavigate();
 	const { courseId } = useParams();
+	const { openAlert } = useSweetAlert();
 	const { user, setUser } = useContext(UserContext);
 	const [name, setName] = useState("");
 	const [price, setPrice] = useState(0);
@@ -62,19 +63,15 @@ export default function CourseView() {
 		.then(res => res.json())
 		.then(data => {
 			if (data === true) {
-				Swal.fire({
+				openAlert({
 				  title: "Enrollment Successful!",
-				  icon: "success",
 				  text: "Thank you for enrolling!",
-				  confirmButtonColor: "#23857a"
 				});
 				navigate("/courses")
 			} else {
-				Swal.fire({
+				openAlert('error', {
 				  title: "Something went wrong!",
-				  icon: "error",
 				  text: "Check your credentials!",
-				  confirmButtonColor: "#23857a"
 				});
 			}
 		})

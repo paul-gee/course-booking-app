@@ -2,12 +2,13 @@
 import { Form, Button, Container, Col, Card } from 'react-bootstrap';
 import { useState, useEffect, useContext } from 'react';
 import { Navigate, Link, useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 import { API_BASE_URL } from '../constants/app';
+import useSweetAlert from '../hooks/useSweetAlert';
 
 export default function AddCourse() {
 	const navigate = useNavigate();
+	const { openAlert } = useSweetAlert();
 	const {user} = useContext(UserContext);
 	const [name, setName] = useState('');
 	const [description, setDescription] = useState('');
@@ -42,19 +43,15 @@ export default function AddCourse() {
 	    .then(res => res.json())
 	    .then(data => {
 	    	if (data) {
-	    		Swal.fire({
+	    		openAlert({
 	    		    title: "Course succesfully Added",
-	    		    icon: "success",
 	    		    text: `${name} is now added`,
-	    		    confirmButtonColor: "#23857a"
 	    		});
 	    		navigate("/admin");
 	    	} else {
-	    		Swal.fire({
+	    		openAlert('error', {
 	    		    title: "Error!",
-	    		    icon: "error",
 	    		    text: `Something went wrong. Please try again later!`,
-	    		    confirmButtonColor: "#23857a"
 	    		});
 	    	}
 	    })

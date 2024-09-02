@@ -2,12 +2,13 @@
 import { useState, useEffect } from 'react';
 import { Card, Form, Button, Col, Container } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import { API_BASE_URL } from '../constants/app.js';
+import useSweetAlert from '../hooks/useSweetAlert.js';
 
 
 export default function Register() {
   const navigate = useNavigate();
+  const { openAlert } = useSweetAlert();
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -35,11 +36,9 @@ export default function Register() {
     .then(res => res.json())
     .then(data => {
       if (data === true) {
-          Swal.fire({
+        openAlert('error', {
           title: "Duplicate Email Found!",
-          icon: "error",
           text: "Kindly provide another email to complete the registration!",
-          confirmButtonColor: "#23857a"
         })
       } else {
         fetch(`${API_BASE_URL}/users/register`,{
@@ -63,19 +62,15 @@ export default function Register() {
             setMobileNo("");
             setPassword1("");
             setPassword2("");
-            Swal.fire({
+            openAlert({
               title: "Registration successful!",
-              icon: "success",
               text: "Welcome to Course Booking!",
-              confirmButtonColor: "#23857a"
             })
             navigate("/login")
           } else {
-            Swal.fire({
+            openAlert('error', {
               title: "Something went wrong!",
-              icon: "error",
               text: "Please try again!",
-              confirmButtonColor: "#23857a"
             })
           }
         })

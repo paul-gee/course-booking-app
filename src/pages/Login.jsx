@@ -1,13 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { Card, Form, Button, Col, Container } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
-import Swal from 'sweetalert2';
 import UserContext from '../UserContext';
 import { API_BASE_URL } from '../constants/app.js';
+import useSweetAlert from '../hooks/useSweetAlert.js';
 
 
 export default function Login() {
   const navigate = useNavigate();
+  const { openAlert } = useSweetAlert();
   const [email, setEmail] = useState ('');
   const [password, setPassword] = useState ('');
   const { setUser } = useContext(UserContext);
@@ -39,19 +40,15 @@ export default function Login() {
           localStorage.setItem('token', data.access)
           retrieveUserDetails(data.access)
 
-          Swal.fire({
+          openAlert({
             title: "Login Successful!",
-            icon: "success",
             text: "Welcome to Course Booking!",
-            confirmButtonColor: "#23857a"
           });
           navigate("/")
         } else {
-          Swal.fire({
+          openAlert('error', {
             title: "Authentication Failed!",
-            icon: "error",
             text: "Check your credentials!",
-            confirmButtonColor: "#23857a" 
           });
         }
       })

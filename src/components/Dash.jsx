@@ -1,14 +1,15 @@
 import { useContext, useState, useEffect } from "react";
 import { Table, Button, ButtonGroup } from "react-bootstrap";
 import { Navigate, Link } from "react-router-dom";
-import Swal from "sweetalert2";
 import UserContext from "../UserContext.js";
 import { API_BASE_URL } from '../constants/app.js';
 import { formatPrice } from '../scripts/utils.js';
+import useSweetAlert from "../hooks/useSweetAlert.js";
 
 
 export default function Dash() {
 	const { user } = useContext(UserContext);
+	const { openAlert } = useSweetAlert();
 	const [allCourses, setAllCourses] = useState([]);
 	
 	useEffect(() => {
@@ -63,19 +64,15 @@ export default function Dash() {
 		.then(res => res.json())
 		.then(data => {
 			if (data) {
-				Swal.fire({
+				openAlert({
 					title: "Archive Succesful!",
-					icon: "success",
 					text: `${courseName} is now inactive.`,
-					confirmButtonColor: "#23857a"
 				})
 				fetchData();
 			} else {
-				Swal.fire({
+				openAlert('error', {
 					title: "Archive Unsuccessful!",
-					icon: "error",
 					text: `Something went wrong. Please try again later!`,
-					confirmButtonColor: "#23857a"
 				})
 			}
 		})
@@ -95,19 +92,15 @@ export default function Dash() {
 		.then(res => res.json())
 		.then(data => {
 			if (data) {
-				Swal.fire({
+				openAlert({
 					title: "Unarchive Succesful!",
-					icon: "success",
 					text: `${courseName} is now active.`,
-					confirmButtonColor: "#23857a"
 				})
 				fetchData();
 			} else {
-				Swal.fire({
+				openAlert('error', {
 					title: "Unarchive Unsuccessful!",
-					icon: "error",
 					text: "Something went wrong. Please try again later!",
-					confirmButtonColor: "#23857a"
 				})
 			}
 		})
