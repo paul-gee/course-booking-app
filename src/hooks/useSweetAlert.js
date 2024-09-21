@@ -2,7 +2,7 @@ import Swal from 'sweetalert2';
 
 export default function useSweetAlert() {
 
-  const openAlert = (type='success', { title, text }) => {
+  const openAlert = ({ type = 'success', title, text }) => {
     return Swal.fire({
       title,
       icon: type,

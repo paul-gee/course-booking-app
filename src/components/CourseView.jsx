@@ -69,7 +69,8 @@ export default function CourseView() {
 				});
 				navigate("/courses")
 			} else {
-				openAlert('error', {
+				openAlert({
+					type: 'error',
 				  title: "Something went wrong!",
 				  text: "Check your credentials!",
 				});

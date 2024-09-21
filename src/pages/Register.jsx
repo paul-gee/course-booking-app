@@ -36,7 +36,8 @@ export default function Register() {
     .then(res => res.json())
     .then(data => {
       if (data === true) {
-        openAlert('error', {
+        openAlert({
+          type: 'error',
           title: "Duplicate Email Found!",
           text: "Kindly provide another email to complete the registration!",
         })
@@ -68,7 +69,8 @@ export default function Register() {
             })
             navigate("/login")
           } else {
-            openAlert('error', {
+            openAlert({
+              type: 'error',
               title: "Something went wrong!",
               text: "Please try again!",
             })

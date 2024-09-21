@@ -28,6 +28,7 @@ export default function EditCourse() {
 		fetch(`${API_BASE_URL}/courses/${courseId}`)
 		.then(res => res.json())
 		.then(data => {
+			setName(data.name);
 			setDescription(data.description);
 			setPrice(data.price);
 			// setSlots(data.slots);
@@ -40,27 +41,28 @@ export default function EditCourse() {
 	    fetch(`${API_BASE_URL}/courses/${courseId}`, {
 	    	method: "PUT",
 	    	headers: {
-				"Content-Type": "application/json",
-				"Authorization": `Bearer ${localStorage.getItem('token')}`
-			},
-			body: JSON.stringify({
-			    name: name,
-			    description: description,
-			    price: price,
-			})
+					"Content-Type": "application/json",
+					"Authorization": `Bearer ${localStorage.getItem('token')}`
+				},
+				body: JSON.stringify({
+					name: name,
+					description: description,
+					price: price,
+				})
 	    })
 	    .then(res => res.json())
 	    .then(data => {
 	    	if (data) {
 	    		openAlert({
-	    		    title: "Course succesfully Updated",
-	    		    text: `${name} is now updated`,
+						title: "Course succesfully Updated",
+						text: `${name} is now updated`,
 	    		});
 	    		navigate("/admin");
 	    	} else {
-	    		openAlert('error', {
-	    		    title: "Error!",
-	    		    text: `Something went wrong. Please try again later!`,
+	    		openAlert({
+						type: 'errpr',
+						title: "Error!",
+						text: `Something went wrong. Please try again later!`,
 	    		});
 	    	}
 	    })

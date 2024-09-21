@@ -34,24 +34,25 @@ export default function AddCourse() {
 					"Authorization": `Bearer ${localStorage.getItem('token')}`
 				},
 				body: JSON.stringify({
-						name: name,
-						description: description,
-						price: price,
-						// slots: slots
+					name: name,
+					description: description,
+					price: price,
+					// slots: slots
 				})
 	    })
 	    .then(res => res.json())
 	    .then(data => {
 	    	if (data) {
 	    		openAlert({
-	    		    title: "Course succesfully Added",
-	    		    text: `${name} is now added`,
+						title: "Course succesfully Added",
+						text: `${name} is now added`,
 	    		});
 	    		navigate("/admin");
 	    	} else {
-	    		openAlert('error', {
-	    		    title: "Error!",
-	    		    text: `Something went wrong. Please try again later!`,
+	    		openAlert({
+						type: 'error',
+						title: "Error!",
+						text: `Something went wrong. Please try again later!`,
 	    		});
 	    	}
 	    })

@@ -44,9 +44,12 @@ export default function Login() {
             title: "Login Successful!",
             text: "Welcome to Course Booking!",
           });
+          setEmail("");
+          setPassword("");
           navigate("/")
         } else {
-          openAlert('error', {
+          openAlert({
+            type: 'error',
             title: "Authentication Failed!",
             text: "Check your credentials!",
           });
@@ -70,8 +73,6 @@ export default function Login() {
           });
         })
       }
-      setEmail("");
-      setPassword("");
   }
 
   return (

@@ -70,7 +70,8 @@ export default function Dash() {
 				})
 				fetchData();
 			} else {
-				openAlert('error', {
+				openAlert({
+					type: 'error',
 					title: "Archive Unsuccessful!",
 					text: `Something went wrong. Please try again later!`,
 				})
@@ -98,7 +99,8 @@ export default function Dash() {
 				})
 				fetchData();
 			} else {
-				openAlert('error', {
+				openAlert({
+					type: 'error',
 					title: "Unarchive Unsuccessful!",
 					text: "Something went wrong. Please try again later!",
 				})
