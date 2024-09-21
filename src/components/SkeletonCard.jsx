@@ -6,8 +6,8 @@ import Skeleton, { SkeletonTheme } from 'react-loading-skeleton';
 export const SkeletonCard = ({ cards }) => {
 	return Array(cards)
 		.fill(0)
-		.map((card) => (
-			<SkeletonTheme key={card} baseColor="#f2faff66" highlightColor="#23857a33">
+		.map((_, idx) => (
+			<SkeletonTheme key={idx} baseColor="#f2faff66" highlightColor="#23857a33">
 				<Container className="p-3 mb-3" >
 					<Card className="course-card text-center p-3">
 						<Skeleton width={250} height={26} borderRadius={26} style={{ marginTop: "9px", marginBottom: "16px" }}/>
