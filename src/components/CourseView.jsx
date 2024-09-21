@@ -101,7 +101,7 @@ export default function CourseView() {
 							(user.isAdmin === true) ?
 								<Button 
 									className="mt-1 px-3 mx-auto"
-									as={ Link } to={`/editCourse/${courseId}`}
+									as={ Link } to={`/edit-course/${courseId}`}
 									variant="primary"
 									size="sm"
 								>

@@ -40,7 +40,7 @@ export default function Dash() {
 									<Button variant="success" size="sm" onClick={() => unarchive(course._id, course.name)}>Unarchive</Button>
 								}
 								<Button as={ Link } to={`/courses/${course._id}`} variant="primary" size="sm" className="mt-1">View</Button>
-								<Button as={ Link } to={`/editCourse/${course._id}`} variant="secondary" size="sm" className="mt-1">Edit</Button>
+								<Button as={ Link } to={`/edit-course/${course._id}`} variant="secondary" size="sm" className="mt-1">Edit</Button>
 							</ButtonGroup>
 						</td>
 					</tr>
@@ -112,7 +112,7 @@ export default function Dash() {
 		<>
 			<div className="my-5 text-center">
 				<h3 className="page-header">Admin Dashboard</h3>
-				<Button className="m-2" as={Link} to="/addCourse" variant="primary" size="md">Add Course</Button>
+				<Button className="m-2" as={Link} to="/add-course" variant="primary" size="md">Add Course</Button>
 				<Button as={Link} to="/admin/enrollments" variant="secondary" size="md" className="m-2">Show Enrollments</Button>
 			</div>
 			<Table className="admin-course-table text-center align-middle" width="100%" striped hover>
