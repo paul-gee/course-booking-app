@@ -52,7 +52,7 @@ export default function Enrollments() {
 							return (
 								<Fragment key={index}>
 									<tr
-										className="table-row admin-enrollees-course-row"
+										className="table-row admin-enrollees-course-row cursor"
 										onClick={() => toggleCollapsibleRow(index)}
 									>
 									<th>{index + 1}  &crarr;</th>

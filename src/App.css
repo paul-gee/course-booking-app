@@ -22,7 +22,6 @@ body {
   background: rgba(242, 250, 255, 40%) !important;
 }
 
-
 .main-container {
   min-height: calc(100vh - 230px);
 }
@@ -31,6 +30,10 @@ body {
 .register-title {
   font-size: 22px;
   color: var(--green-font);
+}
+
+.cursor {
+  cursor: pointer;
 }
 
 .navbar {
